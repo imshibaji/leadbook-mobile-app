@@ -60,6 +60,7 @@ Expanded ieCard({
   String assetsImageName = 'expense.svg',
   Color color = Colors.amber,
   String title = 'Income',
+  String? subtitle,
   String amount = '1,000.00',
   void Function()? onTap,
 }) {
@@ -69,7 +70,7 @@ Expanded ieCard({
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          padding: const EdgeInsets.all(15.0),
+          padding: EdgeInsets.all((subtitle != null) ? 8.0 : 15),
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(),
@@ -84,6 +85,17 @@ Expanded ieCard({
                 'assets/' + assetsImageName,
                 width: 60,
               ),
+              (subtitle != null)
+                  ? Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black87,
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 0,
+                    ),
               Text(
                 title,
                 style: const TextStyle(

@@ -27,16 +27,16 @@ class LeadAdapter extends TypeAdapter<Lead> {
       ..address = fields[12] as String?
       ..source = fields[6] as String?
       ..status = fields[7] as String?
-      ..createAt = fields[13] as DateTime?
       ..followups = (fields[8] as HiveList?)?.castHiveList()
       ..deals = (fields[9] as HiveList?)?.castHiveList()
-      ..payments = (fields[10] as HiveList?)?.castHiveList();
+      ..payments = (fields[10] as HiveList?)?.castHiveList()
+      ..createAt = fields[13] as DateTime?;
   }
 
   @override
   void write(BinaryWriter writer, Lead obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,8 +53,6 @@ class LeadAdapter extends TypeAdapter<Lead> {
       ..write(obj.altMobile)
       ..writeByte(12)
       ..write(obj.address)
-      ..writeByte(13)
-      ..write(obj.createAt)
       ..writeByte(6)
       ..write(obj.source)
       ..writeByte(7)
@@ -64,7 +62,9 @@ class LeadAdapter extends TypeAdapter<Lead> {
       ..writeByte(9)
       ..write(obj.deals)
       ..writeByte(10)
-      ..write(obj.payments);
+      ..write(obj.payments)
+      ..writeByte(13)
+      ..write(obj.createAt);
   }
 
   @override

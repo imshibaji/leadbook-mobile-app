@@ -230,7 +230,7 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
               DateInputField(
                   initialDate: previousDate,
                   onDateChange: (date) {
-                    print(date);
+                    // print(date);
                   }),
             ],
           ),
@@ -246,7 +246,7 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
                 ),
               ),
               DateInputField(onDateChange: (date) {
-                print(date);
+                // print(date);
               }),
             ],
           ),

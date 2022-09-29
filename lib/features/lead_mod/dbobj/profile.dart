@@ -28,9 +28,17 @@ class Profile extends HiveObject {
   String? authKey;
   @HiveField(ProfileFields.imageLink)
   String? imageLink;
+  @HiveField(ProfileFields.bankAccountHolder)
+  String? bankAccountHolder;
+  @HiveField(ProfileFields.bankAccountNumber)
+  String? bankAccountNumber;
+  @HiveField(ProfileFields.bankIfsc)
+  String? bankIfsc;
+  @HiveField(ProfileFields.upiCode)
+  String? upiCode;
 
   @override
   String toString() {
-    return 'Profile(id: $id, uid: $uid, name: $name, email: $email, mobile: $mobile, website: $website, apiServerLink: $apiServerLink, authKey: $authKey, imageLink: $imageLink)';
+    return 'Profile(id: $id, uid: $uid, name: $name, email: $email, mobile: $mobile, website: $website, apiServerLink: $apiServerLink, authKey: $authKey, imageLink: $imageLink, A/C Holder: $bankAccountHolder, A/C Number: $bankAccountNumber, IFSC/RTGS: $bankIfsc, UPI: $upiCode)';
   }
 }

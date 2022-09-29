@@ -26,13 +26,17 @@ class ProfileAdapter extends TypeAdapter<Profile> {
       ..website = fields[5] as String?
       ..apiServerLink = fields[6] as String?
       ..authKey = fields[7] as String?
-      ..imageLink = fields[8] as String?;
+      ..imageLink = fields[8] as String?
+      ..bankAccountHolder = fields[10] as String?
+      ..bankAccountNumber = fields[11] as String?
+      ..bankIfsc = fields[12] as String?
+      ..upiCode = fields[13] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Profile obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -52,7 +56,15 @@ class ProfileAdapter extends TypeAdapter<Profile> {
       ..writeByte(7)
       ..write(obj.authKey)
       ..writeByte(8)
-      ..write(obj.imageLink);
+      ..write(obj.imageLink)
+      ..writeByte(10)
+      ..write(obj.bankAccountHolder)
+      ..writeByte(11)
+      ..write(obj.bankAccountNumber)
+      ..writeByte(12)
+      ..write(obj.bankIfsc)
+      ..writeByte(13)
+      ..write(obj.upiCode);
   }
 
   @override

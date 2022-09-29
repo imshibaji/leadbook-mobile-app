@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
 import '../lead_mod.dart';
-import '../views/mobile/reports.dart';
 
 class ReportsController extends StatelessController {
   const ReportsController({Key? key}) : super(key: key);

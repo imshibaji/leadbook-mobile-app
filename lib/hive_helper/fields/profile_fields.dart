@@ -9,4 +9,10 @@ class ProfileFields {
   static const int authKey = 7;
   static const int imageLink = 8;
   static const int password = 9;
+
+  // Payment Information
+  static const int bankAccountHolder = 10;
+  static const int bankAccountNumber = 11;
+  static const int bankIfsc = 12;
+  static const int upiCode = 13;
 }

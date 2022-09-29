@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '../../../../config/config.dart';
 import '../../../../core/core.dart';
+import '../../dbobj/dbobjs.dart';
 import '../../lead_mod.dart';
 
 class DashboardForMobile extends StatefulWidget {
@@ -15,9 +17,16 @@ class DashboardForMobile extends StatefulWidget {
 
 class _DashboardForMobileState extends State<DashboardForMobile> {
   List<TargetFocus> tergets = [];
-
+  Business? business;
+  Profile? profile;
+  String shareInfoData = 'Share your contact Informations quickly';
   GlobalKey tabBar = GlobalKey();
   GlobalKey actionsButtons = GlobalKey();
+
+  dataConsume(ServiceProvider sp) {
+    business = sp.business;
+    profile = sp.profile;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +34,21 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
       appBar: AppBar(
         leading: const AppIcon(),
         title: const Text('Dashboard'),
-        actions: actionsMenu(context),
+        actions: actionsMenu(context, preActions: [
+          IconButton(
+            onPressed: () {
+              shareDialogBox(context);
+            },
+            icon: const Icon(
+              Icons.share,
+              color: Colors.white,
+            ),
+          )
+        ]),
       ),
       body: Consumer<ServiceProvider>(
         builder: (context, sp, child) {
+          dataConsume(sp);
           var leads = sp.leads ?? [];
           var followups = sp.followups ?? [];
           var deals = sp.deals ?? [];
@@ -47,7 +67,7 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
               children: [
                 balanceCard(
                   title: 'Balance:',
-                  amount: getBalance(payments).toK(),
+                  amount: getBalance(pays).toK(),
                   onTap: () {
                     Nav.goTo("/reports");
                   },
@@ -61,12 +81,15 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
                           color: const Color.fromARGB(255, 3, 236, 154),
                           assetsImageName: 'profits.svg',
                           amount: getTotalIncome(payments).toK(),
+                          title: 'Income',
+                          subtitle: 'This Month',
                           onTap: () {
                             Nav.goTo("/reports");
                           },
                         ),
                         ieCard(
                           title: 'Expenses',
+                          subtitle: 'This Month',
                           color: const Color.fromARGB(255, 254, 147, 147),
                           amount: getTotalExpense(payments).toK(),
                           onTap: () {
@@ -127,18 +150,82 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
         },
       ),
       bottomNavigationBar: LeadAppBottomBar(key: tabBar),
-      // floatingActionButtonLocation:
-      //     FloatingActionButtonLocation.miniCenterFloat,
-      // floatingActionButton: FloatingActionButton(
-      //   shape: const CircleBorder(),
-      //   autofocus: true,
-      //   tooltip: 'Add Lead',
-      //   // mini: true,
-      //   child: const Icon(Icons.person_add_alt),
-      //   onPressed: () {
-      //     Nav.to(context, LeadApp.addLead);
-      //   },
-      // ),
+    );
+  }
+
+  Future<dynamic> shareDialogBox(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Informations'),
+        contentPadding: const EdgeInsets.all(20),
+        content: Text(shareInfoData),
+        actionsAlignment: MainAxisAlignment.spaceBetween,
+        actionsOverflowAlignment: OverflowBarAlignment.center,
+        actionsPadding: const EdgeInsets.only(
+          left: 8,
+          right: 8,
+          bottom: 8,
+          top: 0,
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              var data = business!.name! +
+                  ', Address: ' +
+                  business!.address! +
+                  ', ' +
+                  business!.city! +
+                  ',' +
+                  business!.state! +
+                  ',' +
+                  business!.country! +
+                  ',' +
+                  business!.pincode!.toString() +
+                  ', Phone:' +
+                  business!.phone! +
+                  ', Alt Phone: ' +
+                  (business!.altPhone ?? 'None') +
+                  ', Email:' +
+                  business!.email! +
+                  ', Website: ' +
+                  (business!.website ?? 'No Website') +
+                  ' - Shared By LeadBook';
+              Share.share(data);
+            },
+            child: const Text('Business'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              var data = profile!.name! +
+                  ', Mobile: ' +
+                  (profile!.mobile ?? 'No Number') +
+                  ', Email: ' +
+                  (profile!.email ?? 'No Email') +
+                  ', Website: ' +
+                  (profile!.website ?? 'No Website') +
+                  ' - Shared By LeadBook';
+              Share.share(data);
+            },
+            child: const Text('Personal'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              var data = 'A/C Holder: ' +
+                  (profile!.bankAccountHolder ?? profile!.name!) +
+                  ', A/C Number: ' +
+                  (profile!.bankAccountNumber ?? 'No Number') +
+                  ', IFSC/RTGS: ' +
+                  (profile!.bankIfsc ?? 'No IFSC Code') +
+                  ', UPI Code: ' +
+                  (profile!.upiCode ?? 'No UPI Code') +
+                  ' - Shared By LeadBook';
+              Share.share(data);
+            },
+            child: const Text('Payment'),
+          ),
+        ],
+      ),
     );
   }
 

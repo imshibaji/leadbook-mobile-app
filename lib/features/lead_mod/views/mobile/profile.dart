@@ -52,7 +52,7 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
         key: _form,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
             children: [
               // Padding(
               //   padding: const EdgeInsets.all(8),
@@ -75,6 +75,7 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
                 labelTextStr: 'Name',
                 prefixIcon: Icons.person,
                 initialValue: profile!.name,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     profile!.name = val;
@@ -88,6 +89,7 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
                 prefixIcon: Icons.call,
                 keyboardType: TextInputType.phone,
                 initialValue: profile!.mobile,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     profile!.mobile = val;
@@ -101,6 +103,7 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
                 prefixIcon: Icons.email_outlined,
                 keyboardType: TextInputType.emailAddress,
                 initialValue: profile!.email,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     profile!.email = val;
@@ -109,16 +112,72 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
                   return 'Input Your Email';
                 },
               ),
+              TextInputField(
+                labelTextStr: 'Website',
+                prefixIcon: Icons.web,
+                initialValue: profile!.website ?? '',
+                textInputAction: TextInputAction.next,
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    profile!.website = val;
+                  }
+                  return null;
+                },
+              ),
 
-              // const Divider(),
-              // const Center(child: Text('API Access Information')),
-              // const Divider(),
-              // TextInputField(
-              //   labelTextStr: 'Website',
-              //   prefixIcon: Icons.web,
-              //   readOnly: true,
-              //   initialValue: 'Premium Access Only',
-              // ),
+              const Divider(),
+              const Center(child: Text('Bank Account Information')),
+              const Divider(),
+              //Bank Account Details
+              TextInputField(
+                labelTextStr: 'A/C Holder',
+                prefixIcon: Icons.person,
+                initialValue: profile!.bankAccountHolder ?? '',
+                textInputAction: TextInputAction.next,
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    profile!.bankAccountHolder = val;
+                  }
+                  return null;
+                },
+              ),
+              TextInputField(
+                labelTextStr: 'A/C Number',
+                prefixIcon: Icons.numbers,
+                initialValue: profile!.bankAccountNumber ?? '',
+                textInputAction: TextInputAction.next,
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    profile!.bankAccountNumber = val;
+                  }
+                  return null;
+                },
+              ),
+              TextInputField(
+                labelTextStr: 'IFSC / RTGS',
+                prefixIcon: Icons.person,
+                initialValue: profile!.bankIfsc ?? '',
+                textInputAction: TextInputAction.next,
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    profile!.bankIfsc = val;
+                  }
+                  return null;
+                },
+              ),
+              TextInputField(
+                labelTextStr: 'UPI Code / Payment Code',
+                prefixIcon: Icons.info,
+                initialValue: profile!.upiCode ?? '',
+                textInputAction: TextInputAction.done,
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    profile!.upiCode = val;
+                  }
+                  return null;
+                },
+              ),
+
               // TextInputField(
               //   labelTextStr: 'API URL / Link',
               //   prefixIcon: Icons.api_rounded,
@@ -151,7 +210,7 @@ class _OwnerProfileMobileViewState extends State<OwnerProfileMobileView> {
               //     child: Text('No Data Found'),
               //   ),
               // )),
-              const Spacer(),
+
               ...copyright().toList(),
               const SizedBox(
                 height: 15,

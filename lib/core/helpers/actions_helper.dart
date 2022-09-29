@@ -9,9 +9,11 @@ List<Widget> actionsMenu(
   List<Widget> postActions = const [],
 }) {
   return [
+    ...preActions,
     ...ActionTopButtons.getPreAcction(context).toList(),
     if (ActionTopButtons.dayNightSwitch) const DayNightSwitch(),
     ...ActionTopButtons.getPostAcction(context).toList(),
+    ...postActions,
   ];
 }
 
