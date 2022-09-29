@@ -32,6 +32,14 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
           var leads = sp.leads ?? [];
           var followups = sp.followups ?? [];
           var deals = sp.deals ?? [];
+          var pays = sp.payments ?? [];
+          var firstDayofMoth =
+              DateTime(DateTime.now().year, DateTime.now().month, 1);
+          var payments = pays
+              .where(
+                (element) => firstDayofMoth.isBefore(element.createdAt!),
+              )
+              .toList();
 
           return SizedBox(
             width: double.infinity,
@@ -39,7 +47,10 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
               children: [
                 balanceCard(
                   title: 'Balance:',
-                  amount: getBalance(sp.payments ?? []).toK(),
+                  amount: getBalance(payments).toK(),
+                  onTap: () {
+                    Nav.goTo("/reports");
+                  },
                 ),
                 SizedBox(
                     height: 200,
@@ -49,12 +60,18 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
                         ieCard(
                           color: const Color.fromARGB(255, 3, 236, 154),
                           assetsImageName: 'profits.svg',
-                          amount: getTotalIncome(sp.payments ?? []).toK(),
+                          amount: getTotalIncome(payments).toK(),
+                          onTap: () {
+                            Nav.goTo("/reports");
+                          },
                         ),
                         ieCard(
                           title: 'Expenses',
                           color: const Color.fromARGB(255, 254, 147, 147),
-                          amount: getTotalExpense(sp.payments ?? []).toK(),
+                          amount: getTotalExpense(payments).toK(),
+                          onTap: () {
+                            Nav.goTo("/reports");
+                          },
                         ),
                       ],
                     )),

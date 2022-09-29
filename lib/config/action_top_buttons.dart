@@ -22,6 +22,12 @@ class ActionTopButtons extends ActionButtons {
               label: 'Owner Profile',
               link: LeadApp.profile,
             ),
+            ButtonData(
+              icon: Icons.grading_outlined,
+              label: 'Reports',
+              link: LeadApp.reports,
+            ),
+
             // ButtonData(
             //   icon: Icons.notifications,
             //   label: 'Awasome Notifications',

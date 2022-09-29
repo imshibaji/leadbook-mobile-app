@@ -29,6 +29,7 @@ class LeadApp extends RouteManager {
   static const String helpPage = name + '/help';
   static const String profile = name + '/profile';
   static const String settings = name + '/settings';
+  static const String reports = name + '/reports';
 
   LeadApp() {
     addRoute(LeadApp.home, (context) => const DashboardController());
@@ -67,5 +68,6 @@ class LeadApp extends RouteManager {
     addRoute(helpPage, (context) => const HelpController());
     addRoute(profile, (context) => const ProfileController());
     addRoute(settings, (context) => const SettingsController());
+    addRoute(reports, (context) => const ReportsController());
   }
 }

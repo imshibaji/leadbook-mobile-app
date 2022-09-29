@@ -6,46 +6,50 @@ SizedBox balanceCard({
   Color color = Colors.amber,
   String title = 'Balance',
   String amount = '1,000.00',
+  Function? onTap,
 }) {
   return SizedBox(
     height: 100,
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        padding: const EdgeInsets.all(15.0),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(6),
+    child: InkWell(
+      onTap: () => onTap!(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: const EdgeInsets.all(15.0),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(6),
+            ),
+            color: color,
           ),
-          color: color,
-        ),
-        child: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/' + assetsImageName,
-              width: 50,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 34,
-                color: Colors.black87,
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                'assets/' + assetsImageName,
+                width: 50,
               ),
-            ),
-            const Spacer(),
-            Text(
-              amount,
-              style: const TextStyle(
-                fontSize: 34,
-                color: Colors.black87,
+              const SizedBox(
+                width: 10,
               ),
-            ),
-          ],
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 34,
+                  color: Colors.black87,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                amount,
+                style: const TextStyle(
+                  fontSize: 34,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),
@@ -57,41 +61,45 @@ Expanded ieCard({
   Color color = Colors.amber,
   String title = 'Income',
   String amount = '1,000.00',
+  void Function()? onTap,
 }) {
   return Expanded(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        padding: const EdgeInsets.all(15.0),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(6),
+    child: InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: const EdgeInsets.all(15.0),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(6),
+            ),
+            color: color,
           ),
-          color: color,
-        ),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              'assets/' + assetsImageName,
-              width: 60,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 24,
-                color: Colors.black87,
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                'assets/' + assetsImageName,
+                width: 60,
               ),
-            ),
-            Text(
-              amount,
-              style: const TextStyle(
-                fontSize: 34,
-                color: Colors.black87,
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: Colors.black87,
+                ),
               ),
-            ),
-          ],
+              Text(
+                amount,
+                style: const TextStyle(
+                  fontSize: 34,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),

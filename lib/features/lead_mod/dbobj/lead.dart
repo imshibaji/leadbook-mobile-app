@@ -35,6 +35,8 @@ class Lead extends HiveObject {
   HiveList<Deal>? deals;
   @HiveField(LeadFields.payments)
   HiveList<Payment>? payments;
+  @HiveField(LeadFields.createdAt)
+  DateTime? createAt;
 
   @override
   String toString() {

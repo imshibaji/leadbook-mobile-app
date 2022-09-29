@@ -27,3 +27,4 @@ export 'business_controller.dart';
 export 'help_controller.dart';
 export 'profile_controller.dart';
 export 'settings_controller.dart';
+export 'reports_controller.dart';
