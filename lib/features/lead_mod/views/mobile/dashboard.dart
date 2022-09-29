@@ -67,6 +67,7 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
               children: [
                 balanceCard(
                   title: 'Balance:',
+                  subtitle: 'Total',
                   amount: getBalance(pays).toK(),
                   onTap: () {
                     Nav.goTo("/reports");
@@ -171,56 +172,62 @@ class _DashboardForMobileState extends State<DashboardForMobile> {
         actions: [
           ElevatedButton(
             onPressed: () {
-              var data = business!.name! +
-                  ', Address: ' +
-                  business!.address! +
-                  ', ' +
-                  business!.city! +
-                  ',' +
-                  business!.state! +
-                  ',' +
-                  business!.country! +
-                  ',' +
-                  business!.pincode!.toString() +
-                  ', Phone:' +
-                  business!.phone! +
-                  ', Alt Phone: ' +
-                  (business!.altPhone ?? 'None') +
-                  ', Email:' +
-                  business!.email! +
-                  ', Website: ' +
-                  (business!.website ?? 'No Website') +
-                  ' - Shared By LeadBook';
-              Share.share(data);
+              if (business != null) {
+                var data = business!.name! +
+                    ', Address: ' +
+                    business!.address! +
+                    ', ' +
+                    business!.city! +
+                    ',' +
+                    business!.state! +
+                    ',' +
+                    business!.country! +
+                    ',' +
+                    business!.pincode!.toString() +
+                    ', Phone:' +
+                    business!.phone! +
+                    ', Alt Phone: ' +
+                    (business!.altPhone ?? 'None') +
+                    ', Email:' +
+                    business!.email! +
+                    ', Website: ' +
+                    (business!.website ?? 'No Website') +
+                    ' - Shared By LeadBook';
+                Share.share(data);
+              }
             },
             child: const Text('Business'),
           ),
           ElevatedButton(
             onPressed: () {
-              var data = profile!.name! +
-                  ', Mobile: ' +
-                  (profile!.mobile ?? 'No Number') +
-                  ', Email: ' +
-                  (profile!.email ?? 'No Email') +
-                  ', Website: ' +
-                  (profile!.website ?? 'No Website') +
-                  ' - Shared By LeadBook';
-              Share.share(data);
+              if (profile != null) {
+                var data = profile!.name! +
+                    ', Mobile: ' +
+                    (profile!.mobile ?? 'No Number') +
+                    ', Email: ' +
+                    (profile!.email ?? 'No Email') +
+                    ', Website: ' +
+                    (profile!.website ?? 'No Website') +
+                    ' - Shared By LeadBook';
+                Share.share(data);
+              }
             },
             child: const Text('Personal'),
           ),
           ElevatedButton(
             onPressed: () {
-              var data = 'A/C Holder: ' +
-                  (profile!.bankAccountHolder ?? profile!.name!) +
-                  ', A/C Number: ' +
-                  (profile!.bankAccountNumber ?? 'No Number') +
-                  ', IFSC/RTGS: ' +
-                  (profile!.bankIfsc ?? 'No IFSC Code') +
-                  ', UPI Code: ' +
-                  (profile!.upiCode ?? 'No UPI Code') +
-                  ' - Shared By LeadBook';
-              Share.share(data);
+              if (profile != null) {
+                var data = 'A/C Holder: ' +
+                    (profile!.bankAccountHolder ?? profile!.name!) +
+                    ', A/C Number: ' +
+                    (profile!.bankAccountNumber ?? 'No Number') +
+                    ', IFSC/RTGS: ' +
+                    (profile!.bankIfsc ?? 'No IFSC Code') +
+                    ', UPI Code: ' +
+                    (profile!.upiCode ?? 'No UPI Code') +
+                    ' - Shared By LeadBook';
+                Share.share(data);
+              }
             },
             child: const Text('Payment'),
           ),

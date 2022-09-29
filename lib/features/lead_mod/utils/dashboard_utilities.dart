@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 SizedBox balanceCard({
   String assetsImageName = 'balance.svg',
   Color color = Colors.amber,
+  String? subtitle,
   String title = 'Balance',
   String amount = '1,000.00',
   Function? onTap,
@@ -33,12 +34,29 @@ SizedBox balanceCard({
               const SizedBox(
                 width: 10,
               ),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 34,
-                  color: Colors.black87,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  (subtitle != null)
+                      ? Text(
+                          subtitle,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                          ),
+                        )
+                      : const SizedBox(),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: (subtitle == null) ? 34 : 22,
+                      color: Colors.black87,
+                      fontWeight: (subtitle != null)
+                          ? FontWeight.bold
+                          : FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
               const Spacer(),
               Text(

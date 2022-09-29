@@ -44,8 +44,10 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
           end: currentDate,
           start: previousDate,
         ));
-    currentDate = picked!.end;
-    previousDate = picked.start;
+    if (picked != null) {
+      currentDate = picked.end;
+      previousDate = picked.start;
+    }
     setState(() {});
   }
 
