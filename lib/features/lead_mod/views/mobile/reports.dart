@@ -78,7 +78,8 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
                     dateTimeRangePicker();
                   },
                 ),
-                SizedBox(
+                Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 200,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,9 +97,12 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
                     ],
                   ),
                 ),
-                balanceCard(
-                  title: 'Balance:',
-                  amount: getBalance(payments).toK(),
+                Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: balanceCard(
+                    title: 'Balance:',
+                    amount: getBalance(payments).toK(),
+                  ),
                 ),
                 transectionsList(
                   getTransactionFilter(payments, 'All') as List<Payment>,

@@ -22,8 +22,9 @@ List getTransactionFilter(List list, [String status = 'All']) {
   }
 }
 
-Container quickTotalView(ServiceProvider sp) {
+Container quickTotalView(BuildContext context, ServiceProvider sp) {
   return Container(
+    color: Theme.of(context).scaffoldBackgroundColor,
     padding: const EdgeInsets.all(10),
     child: Column(
       children: [

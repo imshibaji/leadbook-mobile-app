@@ -28,7 +28,7 @@ class _TransactionsForMobileState extends State<TransactionsForMobile> {
       body: Consumer<ServiceProvider>(
         builder: (context, sp, child) {
           return Column(children: [
-            quickTotalView(sp),
+            quickTotalView(context, sp),
             Container(
               color: Colors.teal.withOpacity(0.4),
               padding: const EdgeInsets.all(0),
