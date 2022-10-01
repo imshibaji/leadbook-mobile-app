@@ -178,7 +178,17 @@ class _ListLeadForMobileState extends State<ListLeadForMobile>
                   ),
                 );
               })
-          : Center(child: Text(notFound)),
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(notFound),
+                ElevatedButton(
+                    onPressed: () {
+                      Nav.go('/help');
+                    },
+                    child: const Text('View Tutorial'))
+              ],
+            ),
     );
   }
 

@@ -33,11 +33,11 @@ class ActionTopButtons extends ActionButtons {
             //   label: 'Awasome Notifications',
             //   link: AwasomeNotificationApp.home,
             // ),
-            // ButtonData(
-            //   icon: Icons.help_outline_sharp,
-            //   label: 'Helps & Tutorials',
-            //   link: LeadApp.helpPage,
-            // ),
+            ButtonData(
+              icon: Icons.help_outline_sharp,
+              label: 'Helps & Tutorials',
+              link: LeadApp.helpPage,
+            ),
             // ButtonData(
             //   icon: Icons.settings_applications_outlined,
             //   label: 'Settings',

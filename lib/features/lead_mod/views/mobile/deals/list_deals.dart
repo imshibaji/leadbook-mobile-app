@@ -239,8 +239,16 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                 );
               },
             )
-          : Center(
-              child: Text(notFoundTxt),
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(notFoundTxt),
+                ElevatedButton(
+                    onPressed: () {
+                      Nav.go('/help');
+                    },
+                    child: const Text('View Tutorial'))
+              ],
             ),
     );
   }

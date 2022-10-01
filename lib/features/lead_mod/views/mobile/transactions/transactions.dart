@@ -110,8 +110,16 @@ class _TransactionsForMobileState extends State<TransactionsForMobile> {
                 trans[index],
               ),
             )
-          : Center(
-              child: Text(notFoundTxt),
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(notFoundTxt),
+                ElevatedButton(
+                    onPressed: () {
+                      Nav.go('/help');
+                    },
+                    child: const Text('View Tutorial'))
+              ],
             ),
     );
   }

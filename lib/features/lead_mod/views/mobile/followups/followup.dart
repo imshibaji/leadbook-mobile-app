@@ -106,8 +106,16 @@ class _FollowupForMobileState extends State<FollowupForMobile> {
               itemCount: followups.length,
               itemBuilder: (context, index) => listItem(followups[index], sp),
             )
-          : Center(
-              child: Text(notFoundTxt),
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(notFoundTxt),
+                ElevatedButton(
+                    onPressed: () {
+                      Nav.go('/help');
+                    },
+                    child: const Text('View Tutorial'))
+              ],
             ),
     );
   }
