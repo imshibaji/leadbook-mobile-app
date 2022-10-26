@@ -38,13 +38,13 @@ class AppButton extends StatelessWidget {
               style: const TextStyle(fontSize: 12),
             ),
             style: ElevatedButton.styleFrom(
-              primary: backgroundColor ??
+              backgroundColor: backgroundColor ??
                   (tm.isDarkMode
                       ? const Color.fromARGB(255, 193, 253, 247)
                           .withOpacity(0.2)
                       : const Color.fromARGB(255, 248, 255, 254)
                           .withOpacity(1.0)),
-              onPrimary: textColor,
+              foregroundColor: textColor,
               padding: EdgeInsets.all(paddingValue!),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(circularValue!),
@@ -63,12 +63,12 @@ class AppButton extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
           style: ElevatedButton.styleFrom(
-            primary: backgroundColor ??
+            backgroundColor: backgroundColor ??
                 (tm.isDarkMode
                     ? const Color.fromARGB(255, 193, 253, 247).withOpacity(0.2)
                     : const Color.fromARGB(255, 248, 255, 254)
                         .withOpacity(1.0)),
-            onPrimary: textColor,
+            foregroundColor: textColor,
             padding: EdgeInsets.all(paddingValue!),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(circularValue!),

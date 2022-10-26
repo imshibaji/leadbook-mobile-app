@@ -32,8 +32,8 @@ class AuthButton extends StatelessWidget {
               style: const TextStyle(fontSize: 16),
             ),
             style: ElevatedButton.styleFrom(
-              primary: backgroundColor,
-              onPrimary: textColor,
+              backgroundColor: backgroundColor,
+              foregroundColor: textColor,
               padding: EdgeInsets.all(paddingValue!),
             ),
           ),
@@ -49,8 +49,8 @@ class AuthButton extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
           style: ElevatedButton.styleFrom(
-            primary: backgroundColor,
-            onPrimary: textColor,
+            backgroundColor: backgroundColor,
+            foregroundColor: textColor,
             padding: EdgeInsets.all(paddingValue!),
           ),
         ),

@@ -405,7 +405,8 @@ void dealPaymentAdd(Deal deal) async {
   payment.amount = ((deal.price ?? 0) - (deal.discount ?? 0));
   payment.leadUid = deal.leadUid;
   payment.type = 'Income';
-  payment.createdAt = DateTime.now();
+  // payment.createdAt = DateTime.now();
+  payment.createdAt = deal.createdAt;
   int i = await ps.add(payment);
   payment.save();
   // log(payment.toString());

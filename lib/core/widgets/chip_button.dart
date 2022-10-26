@@ -39,13 +39,13 @@ class ChipButton extends StatelessWidget {
               label: label,
             ),
             style: ElevatedButton.styleFrom(
-              primary: backgroundColor ??
+              backgroundColor: backgroundColor ??
                   (tm.isDarkMode
                       ? const Color.fromARGB(255, 2, 94, 84)
                           .withOpacity(!isHighlight! ? 0.3 : 1.0)
                       : const Color.fromARGB(255, 247, 252, 252)
                           .withOpacity(!isHighlight! ? 1.0 : 0.8)),
-              onPrimary: textColor,
+              foregroundColor: textColor,
               padding: EdgeInsets.all(paddingValue!),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(circularValue!),
@@ -63,13 +63,13 @@ class ChipButton extends StatelessWidget {
             label: label,
           ),
           style: ElevatedButton.styleFrom(
-            primary: backgroundColor ??
+            backgroundColor: backgroundColor ??
                 (tm.isDarkMode
                     ? const Color.fromARGB(255, 2, 94, 84)
                         .withOpacity(!isHighlight! ? 0.3 : 1.0)
                     : const Color.fromARGB(255, 247, 252, 252)
                         .withOpacity(!isHighlight! ? 1.0 : 0.8)),
-            onPrimary: textColor,
+            foregroundColor: textColor,
             padding: EdgeInsets.all(paddingValue!),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(circularValue!),
