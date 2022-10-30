@@ -14,7 +14,7 @@ class ListDealController extends StatelessController {
     sp.getAllLeads();
     sp.getAllDeals();
     return Display(
-      title: 'Proposals / Deals',
+      title: 'Invoices / Deals',
       mobile: const ListDealForMobile(),
     );
   }

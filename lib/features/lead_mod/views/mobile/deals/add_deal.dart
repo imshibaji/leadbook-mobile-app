@@ -29,7 +29,7 @@ class _AddDealState extends State<AddDeal> {
     final sp = context.read<ServiceProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Deal'),
+        title: const Text('Add New Invoice'),
         actions: actionsMenu(context),
       ),
       bottomNavigationBar: LeadAppBottomBar(),
@@ -56,18 +56,18 @@ class _AddDealState extends State<AddDeal> {
               ),
               TextInputField(
                 prefixIcon: Icons.edit_note,
-                labelTextStr: 'Deal Name',
+                labelTextStr: 'Invoice ID',
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     ideal.name = val;
                     return null;
                   }
-                  return 'Input Discussion Details';
+                  return 'Input Invoice ID / Journal Code';
                 },
               ),
               TextInputField(
                 prefixIcon: Icons.edit_note,
-                labelTextStr: 'Deal Deatils',
+                labelTextStr: 'Invoice Deatils',
                 maxLines: 3,
                 textInputAction: TextInputAction.done,
                 contentPadding: const EdgeInsets.all(9),
@@ -76,7 +76,7 @@ class _AddDealState extends State<AddDeal> {
                     ideal.details = val;
                     return null;
                   }
-                  return 'Input Deal Details';
+                  return 'Input Invoice Details';
                 },
               ),
               Row(

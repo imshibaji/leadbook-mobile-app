@@ -52,6 +52,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'Business Name',
                 prefixIcon: Icons.business,
                 initialValue: business!.name,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.name = val;
@@ -64,6 +65,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'Business Address',
                 prefixIcon: Icons.maps_ugc_outlined,
                 initialValue: business!.address,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.address = val;
@@ -75,6 +77,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'City / Village',
                 prefixIcon: Icons.location_city_rounded,
                 initialValue: business!.city,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.city = val;
@@ -87,6 +90,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'State / Region',
                 prefixIcon: Icons.location_city_rounded,
                 initialValue: business!.state,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.state = val;
@@ -98,6 +102,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'Country',
                 prefixIcon: Icons.map,
                 initialValue: business!.country,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.country = val;
@@ -110,6 +115,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'Pincode',
                 prefixIcon: Icons.map,
                 keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
                 initialValue: (business!.pincode != null)
                     ? business!.pincode.toString()
                     : '',
@@ -126,6 +132,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 prefixIcon: Icons.email_outlined,
                 keyboardType: TextInputType.emailAddress,
                 initialValue: business!.email,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.email = val;
@@ -137,6 +144,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 labelTextStr: 'Official Website',
                 prefixIcon: Icons.web,
                 initialValue: business!.website,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.website = val;
@@ -149,6 +157,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 prefixIcon: Icons.location_city_rounded,
                 keyboardType: TextInputType.phone,
                 initialValue: business!.phone,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.phone = val;
@@ -162,6 +171,7 @@ class _BusinessMobileViewState extends State<BusinessMobileView> {
                 prefixIcon: Icons.location_city_rounded,
                 keyboardType: TextInputType.phone,
                 initialValue: business!.altPhone,
+                textInputAction: TextInputAction.next,
                 validator: (val) {
                   if (val!.isNotEmpty) {
                     business!.altPhone = val;

@@ -14,7 +14,7 @@ class AddDealController extends StatelessController {
     sp.getAllLeads();
     sp.getAllDeals();
     return Display(
-      title: 'Add Proposals / Deals',
+      title: 'Add Invoice / Deal',
       mobile: const AddDeal(),
     );
   }

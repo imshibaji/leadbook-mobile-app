@@ -25,7 +25,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
     return Scaffold(
       appBar: AppBar(
         leading: const AppIcon(),
-        title: const Text('Proposals'),
+        title: const Text('Invoices'),
         actions: actionsMenu(context),
       ),
       body: Consumer<ServiceProvider>(
@@ -94,7 +94,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                 allDeals(
                   getFilterDatas(sp.deals ?? [], status) as List<Deal>,
                   sp,
-                  notFoundTxt: '$status deal list not found',
+                  notFoundTxt: 'No $status invoice list found',
                 )
             ],
           ),
@@ -106,7 +106,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
   Widget allDeals(
     List<Deal> deals,
     ServiceProvider sp, {
-    String notFoundTxt = 'No Proposuls listed.',
+    String notFoundTxt = 'No Invoices listed.',
   }) {
     List<Deal> allDeals = deals;
 
@@ -158,7 +158,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Invoice#' +
+                                'Bill: #' +
                                     (deal.key + 1).toString() +
                                     ' | At: ' +
                                     dateTime,
@@ -166,7 +166,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                                 style: const TextStyle(fontSize: 8),
                               ),
                               Text(
-                                deal.name ?? 'No Name',
+                                deal.name ?? 'No ID',
                                 textAlign: TextAlign.left,
                               ),
                             ],

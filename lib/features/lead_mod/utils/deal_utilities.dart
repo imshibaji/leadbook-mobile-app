@@ -225,14 +225,14 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: TextInputField(
                     prefixIcon: Icons.edit_note,
-                    labelTextStr: 'Deal Name',
+                    labelTextStr: 'Invoice ID',
                     initialValue: deal.name,
                     validator: (val) {
                       if (val!.isNotEmpty) {
                         ideal.name = val;
                         return null;
                       }
-                      return 'Input Discussion Details';
+                      return 'Input Invoice ID / Journal Code';
                     },
                   ),
                 ),
@@ -241,7 +241,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: TextInputField(
                     prefixIcon: Icons.edit_note,
-                    labelTextStr: 'Deal Deatils',
+                    labelTextStr: 'Invoice Deatils',
                     maxLines: 3,
                     textInputAction: TextInputAction.done,
                     contentPadding: const EdgeInsets.all(9),
@@ -251,13 +251,13 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                         ideal.details = val;
                         return null;
                       }
-                      return 'Input Deal Details';
+                      return 'Input Invoice Details';
                     },
                   ),
                 ),
                 TextInputField(
                   prefixIcon: Icons.edit_note,
-                  labelTextStr: 'Deal Amount',
+                  labelTextStr: 'Invoice Amount',
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,
                   contentPadding: const EdgeInsets.all(9),
@@ -267,7 +267,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                       ideal.price = double.parse(val);
                       return null;
                     }
-                    return 'Input Deal Amount';
+                    return 'Input Invoice Amount';
                   },
                 ),
                 TextInputField(
@@ -299,7 +299,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                       ideal.status = val;
                       return null;
                     }
-                    return 'Input Discussion Status';
+                    return 'Input Invoice Status';
                   },
                 ),
                 Row(
@@ -356,7 +356,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                         )
                         .first;
                     AwesomeNotificationService().showActivityNotification(
-                      'Deal: ' + ideal.name!,
+                      'Invoice: ' + ideal.name!,
                       ideal.details! +
                           ' amount of ' +
                           (ideal.price! - ideal.discount!).toString() +
@@ -373,7 +373,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                   }
 
                   Nav.close(context);
-                  showMessage(context, 'Deal Data is Updated.');
+                  showMessage(context, 'Invoice Data is Updated.');
                 }
               },
             ),
@@ -390,7 +390,7 @@ void doneDeal(BuildContext context, Deal deal, ServiceProvider sp) async {
     await deal.save();
 
     dealPaymentAdd(deal);
-    showMessage(context, 'Deal Data is Updated as Paid.');
+    showMessage(context, 'Invoice Data is Updated as Paid.');
   }
 
   sp.getAllDeals();
@@ -426,7 +426,7 @@ void notDoneDeal(BuildContext context, Deal deal, ServiceProvider sp) async {
     await deal.save();
     // log("Deal: " + deal.uid!);
     dealPaymentRemove(deal);
-    showMessage(context, 'Deal Data is Updated as Pending.');
+    showMessage(context, 'Invoice Data is Updated as Pending.');
   }
   sp.getAllDeals();
 }

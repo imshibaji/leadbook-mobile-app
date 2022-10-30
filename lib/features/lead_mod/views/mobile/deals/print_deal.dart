@@ -174,22 +174,106 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           children: [
             pw.Center(
               child: pw.Text(
-                'Invoice#${deal!.key + 1}',
+                'Invoice',
                 style: const pw.TextStyle(fontSize: 24),
               ),
             ),
             pw.Divider(),
-            pw.SizedBox(height: 50),
-            ...clientInfo(font).toList(),
+            pw.SizedBox(height: 10),
+            pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        ...clientInfo(font).toList(),
+                      ]),
+                  pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.end,
+                      children: [
+                        pw.Text(
+                          'Bill NO: 000' + (deal!.key + 1).toString(),
+                          style: pw.TextStyle(font: font),
+                        ),
+                        pw.Text(
+                          'For: #' + deal!.name!,
+                          style: pw.TextStyle(font: font),
+                        ),
+                      ]),
+                ]),
             pw.SizedBox(
               height: 30,
             ),
             invoiceTable(),
             pw.SizedBox(height: 30),
+            paymentDetails(font),
             signtureArea(signFont),
           ],
         ),
       ),
+    );
+  }
+
+  pw.Padding paymentDetails(pw.Font font) {
+    return pw.Padding(
+      padding: const pw.EdgeInsets.only(bottom: 20),
+      child: pw
+          .Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        if (profile != null && profile!.bankAccountNumber != null)
+          pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
+            pw.Text(
+              'Bank Pay Details:',
+              style: const pw.TextStyle(fontSize: 18),
+            ),
+            pw.SizedBox(height: 5),
+            if (profile != null && profile!.bankAccountHolder != null)
+              pw.Text(
+                profile!.bankAccountHolder ?? 'No Name',
+                style: pw.TextStyle(fontSize: 20, font: font),
+              ),
+            if (profile != null && profile!.bankIfsc != null)
+              pw.Text(
+                'IFSC / RTGS CODE: ' + (profile!.bankIfsc ?? 'No IFSC / RTGS'),
+                style: pw.TextStyle(fontSize: 14, font: font),
+              ),
+            if (profile != null && profile!.bankAccountNumber != null)
+              pw.Text(
+                'A/C Number: ' +
+                    (profile!.bankAccountNumber ?? 'No A/C Number'),
+                style: pw.TextStyle(fontSize: 14, font: font),
+              ),
+            pw.SizedBox(height: 20),
+            pw.Text(
+              'Payment Status: ' + deal!.status!,
+              style: const pw.TextStyle(fontSize: 18),
+            ),
+          ]),
+        if (profile != null && profile!.upiCode != null)
+          pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.center,
+              children: [
+                pw.Text('UPI Payment Code'),
+                pw.Text(profile!.upiCode!),
+                pw.Padding(
+                  padding:
+                      const pw.EdgeInsets.only(right: 20, left: 20, top: 5),
+                  child: pw.BarcodeWidget(
+                    data: UPIDetails(
+                      payeeName: profile!.name!,
+                      upiID: profile!.upiCode!,
+                      transactionNote: deal!.details!,
+                      amount: (deal!.status!.toLowerCase() != 'paid')
+                          ? (deal!.price! - deal!.discount!)
+                          : 0,
+                    ).qrCodeValue,
+                    barcode: pw.Barcode.fromType(pw.BarcodeType.QrCode),
+                    color: PdfColors.black,
+                    width: 90,
+                    height: 90,
+                  ),
+                ),
+              ]),
+      ]),
     );
   }
 
