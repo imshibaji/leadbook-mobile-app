@@ -82,6 +82,40 @@ class _AddDealState extends State<AddDeal> {
               Row(
                 children: [
                   Expanded(
+                    flex: 2,
+                    child: TextInputField(
+                      prefixIcon: Icons.currency_exchange_rounded,
+                      labelTextStr: 'Sign',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      contentPadding: const EdgeInsets.all(9),
+                      initialValue: '\u{20B9}',
+                      validator: (val) {
+                        ideal.currencySymbol = val;
+                        return null;
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: TextInputField(
+                      prefixIcon: Icons.money,
+                      labelTextStr: 'Currency Code',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      contentPadding: const EdgeInsets.all(9),
+                      initialValue: 'INR',
+                      validator: (val) {
+                        ideal.currencyCode = val;
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
                     child: TextInputField(
                       prefixIcon: Icons.edit_note,
                       labelTextStr: 'Amount',
@@ -107,6 +141,42 @@ class _AddDealState extends State<AddDeal> {
                       validator: (val) {
                         if (val!.isNotEmpty) {
                           ideal.discount = double.parse(val);
+                          return null;
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextInputField(
+                      prefixIcon: Icons.edit_note,
+                      labelTextStr: 'Paid Amount',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.number,
+                      contentPadding: const EdgeInsets.all(9),
+                      validator: (val) {
+                        if (val!.isNotEmpty) {
+                          ideal.paidAmt = double.parse(val);
+                          return null;
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextInputField(
+                      prefixIcon: Icons.edit_note,
+                      labelTextStr: 'Pending Amount',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.number,
+                      contentPadding: const EdgeInsets.all(9),
+                      validator: (val) {
+                        if (val!.isNotEmpty) {
+                          ideal.pendingAmt = double.parse(val);
                           return null;
                         }
                         return null;

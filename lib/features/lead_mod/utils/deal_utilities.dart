@@ -218,108 +218,181 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
           scrollable: true,
           content: SizedBox(
             height: 430,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: TextInputField(
-                    prefixIcon: Icons.edit_note,
-                    labelTextStr: 'Invoice ID',
-                    initialValue: deal.name,
-                    validator: (val) {
-                      if (val!.isNotEmpty) {
-                        ideal.name = val;
-                        return null;
-                      }
-                      return 'Input Invoice ID / Journal Code';
-                    },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: TextInputField(
+                      prefixIcon: Icons.edit_note,
+                      labelTextStr: 'Invoice ID',
+                      initialValue: deal.name,
+                      validator: (val) {
+                        if (val!.isNotEmpty) {
+                          ideal.name = val;
+                          return null;
+                        }
+                        return 'Input Invoice ID / Journal Code';
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: TextInputField(
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: TextInputField(
+                      prefixIcon: Icons.edit_note,
+                      labelTextStr: 'Invoice Deatils',
+                      maxLines: 3,
+                      textInputAction: TextInputAction.done,
+                      contentPadding: const EdgeInsets.all(9),
+                      initialValue: deal.details,
+                      validator: (val) {
+                        if (val!.isNotEmpty) {
+                          ideal.details = val;
+                          return null;
+                        }
+                        return 'Input Invoice Details';
+                      },
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextInputField(
+                          prefixIcon: Icons.money,
+                          labelTextStr: 'CurCode',
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          contentPadding: const EdgeInsets.all(9),
+                          initialValue: deal.currencyCode ?? 'INR',
+                          validator: (val) {
+                            if (val!.isNotEmpty) {
+                              ideal.currencyCode = val;
+                              return null;
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: TextInputField(
+                          prefixIcon: Icons.currency_exchange_rounded,
+                          labelTextStr: 'Sign',
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          contentPadding: const EdgeInsets.all(9),
+                          initialValue: deal.currencySymbol ?? '\u{20B9}',
+                          validator: (val) {
+                            if (val!.isNotEmpty) {
+                              ideal.currencySymbol = val;
+                              return null;
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  TextInputField(
                     prefixIcon: Icons.edit_note,
-                    labelTextStr: 'Invoice Deatils',
-                    maxLines: 3,
+                    labelTextStr: 'Invoice Amount',
                     textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
                     contentPadding: const EdgeInsets.all(9),
-                    initialValue: deal.details,
+                    initialValue: deal.price.toString(),
                     validator: (val) {
                       if (val!.isNotEmpty) {
-                        ideal.details = val;
+                        ideal.price = double.parse(val);
                         return null;
                       }
-                      return 'Input Invoice Details';
+                      return 'Input Invoice Amount';
                     },
                   ),
-                ),
-                TextInputField(
-                  prefixIcon: Icons.edit_note,
-                  labelTextStr: 'Invoice Amount',
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.number,
-                  contentPadding: const EdgeInsets.all(9),
-                  initialValue: deal.price.toString(),
-                  validator: (val) {
-                    if (val!.isNotEmpty) {
-                      ideal.price = double.parse(val);
+                  TextInputField(
+                    prefixIcon: Icons.edit_note,
+                    labelTextStr: 'Discount Amount',
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
+                    contentPadding: const EdgeInsets.all(9),
+                    initialValue:
+                        (deal.discount != null) ? deal.discount.toString() : '',
+                    validator: (val) {
+                      if (val!.isNotEmpty) {
+                        ideal.discount = double.parse(val);
+                        return null;
+                      }
                       return null;
-                    }
-                    return 'Input Invoice Amount';
-                  },
-                ),
-                TextInputField(
-                  prefixIcon: Icons.edit_note,
-                  labelTextStr: 'Discount Amount',
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.number,
-                  contentPadding: const EdgeInsets.all(9),
-                  initialValue:
-                      (deal.discount != null) ? deal.discount.toString() : '',
-                  validator: (val) {
-                    if (val!.isNotEmpty) {
-                      ideal.discount = double.parse(val);
+                    },
+                  ),
+                  TextInputField(
+                    prefixIcon: Icons.edit_note,
+                    labelTextStr: 'Paid Amount',
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
+                    contentPadding: const EdgeInsets.all(9),
+                    initialValue:
+                        (deal.paidAmt != null) ? deal.paidAmt.toString() : '',
+                    validator: (val) {
+                      if (val!.isNotEmpty) {
+                        ideal.paidAmt = double.parse(val);
+                        return null;
+                      }
                       return null;
-                    }
-                    return null;
-                  },
-                ),
-                SelectOptionField(
-                  prefixIcon: Icons.water_drop_outlined,
-                  labelTextStr: 'Status',
-                  options: const [
-                    'Pending',
-                    'Paid',
-                  ],
-                  selected: deal.status,
-                  validator: (val) {
-                    if (val!.isNotEmpty) {
-                      ideal.status = val;
+                    },
+                  ),
+                  TextInputField(
+                    prefixIcon: Icons.edit_note,
+                    labelTextStr: 'Pending Amount',
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
+                    contentPadding: const EdgeInsets.all(9),
+                    initialValue: (deal.pendingAmt != null)
+                        ? deal.pendingAmt.toString()
+                        : '',
+                    validator: (val) {
+                      if (val!.isNotEmpty) {
+                        ideal.pendingAmt = double.parse(val);
+                        return null;
+                      }
                       return null;
-                    }
-                    return 'Input Invoice Status';
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: DateInputField(
-                        initialDate: deal.createdAt,
-                        onDateChange: (date) => selectedDate = date,
+                    },
+                  ),
+                  SelectOptionField(
+                    prefixIcon: Icons.water_drop_outlined,
+                    labelTextStr: 'Status',
+                    options: const [
+                      'Pending',
+                      'Paid',
+                    ],
+                    selected: deal.status,
+                    validator: (val) {
+                      if (val!.isNotEmpty) {
+                        ideal.status = val;
+                        return null;
+                      }
+                      return 'Input Invoice Status';
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: DateInputField(
+                          initialDate: deal.createdAt,
+                          onDateChange: (date) => selectedDate = date,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: TimeInputField(
-                        initialTime: deal.createdAt,
-                        onTimeChange: (time) => selectedTime = time,
+                      Expanded(
+                        child: TimeInputField(
+                          initialTime: deal.createdAt,
+                          onTimeChange: (time) => selectedTime = time,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           actions: [
@@ -359,7 +432,7 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                       'Invoice: ' + ideal.name!,
                       ideal.details! +
                           ' amount of ' +
-                          (ideal.price! - ideal.discount!).toString() +
+                          (ideal.price! - (ideal.discount ?? 0)).toString() +
                           ' is ' +
                           ideal.status!,
                       payload: {

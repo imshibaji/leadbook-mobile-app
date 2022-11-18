@@ -8,4 +8,8 @@ class DealFields {
   static const int createdAt = 6;
   static const int leadUid = 7;
   static const int discount = 8;
+  static const int currencySymbol = 9;
+  static const int currencyCode = 10;
+  static const int paidAmt = 11;
+  static const int pendingAmt = 12;
 }

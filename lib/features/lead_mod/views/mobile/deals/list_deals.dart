@@ -158,7 +158,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Bill: #' +
+                                'Invoice: #' +
                                     (deal.key + 1).toString() +
                                     ' | At: ' +
                                     dateTime,
@@ -173,7 +173,9 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                           ),
                         ),
                         Text(
-                          ((deal.price ?? 0) - (deal.discount ?? 0)).toString(),
+                          (deal.currencySymbol ?? '₹') +
+                              ((deal.price ?? 0) - (deal.discount ?? 0))
+                                  .toStringAsFixed(2),
                           style: const TextStyle(fontSize: 12),
                         ),
                       ],

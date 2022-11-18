@@ -42,14 +42,22 @@ class DealAdapter extends TypeAdapter<Deal> {
       ..write(obj.details)
       ..writeByte(4)
       ..write(obj.price)
-      ..writeByte(8)
-      ..write(obj.discount)
       ..writeByte(5)
       ..write(obj.status)
       ..writeByte(6)
       ..write(obj.createdAt)
       ..writeByte(7)
-      ..write(obj.leadUid);
+      ..write(obj.leadUid)
+      ..writeByte(8)
+      ..write(obj.discount)
+      ..writeByte(9)
+      ..write(obj.currencySymbol)
+      ..writeByte(10)
+      ..write(obj.currencyCode)
+      ..writeByte(11)
+      ..write(obj.paidAmt)
+      ..writeByte(12)
+      ..write(obj.pendingAmt);
   }
 
   @override

@@ -10,7 +10,7 @@ class HelpController extends StatelessController {
   Display view(BuildContext context) {
     return Display(
       title: 'LeadsBook - Helps',
-      mobile: HelpMobileView(),
+      mobile: const HelpMobileView(),
     );
   }
 }

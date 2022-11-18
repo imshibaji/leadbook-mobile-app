@@ -489,46 +489,77 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
       child: SizedBox(
         // height: formHeight,
         width: double.infinity,
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            TextInputField(
-              prefixIcon: Icons.edit_note,
-              labelTextStr: 'Deal Name',
-              validator: (val) {
-                if (val!.isNotEmpty) {
-                  ideal.name = val;
-                  return null;
-                }
-                return 'Input Discussion Details';
-              },
-            ),
-            TextInputField(
-              prefixIcon: Icons.edit_note,
-              labelTextStr: 'Deal Deatils',
-              maxLines: 3,
-              textInputAction: TextInputAction.done,
-              contentPadding: const EdgeInsets.all(9),
-              validator: (val) {
-                if (val!.isNotEmpty) {
-                  ideal.details = val;
-                  return null;
-                }
-                return 'Input Deal Details';
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Row(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              TextInputField(
+                prefixIcon: Icons.edit_note,
+                labelTextStr: 'Deal Name',
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    ideal.name = val;
+                    return null;
+                  }
+                  return 'Input Discussion Details';
+                },
+              ),
+              TextInputField(
+                prefixIcon: Icons.edit_note,
+                labelTextStr: 'Deal Deatils',
+                maxLines: 3,
+                textInputAction: TextInputAction.done,
+                contentPadding: const EdgeInsets.all(9),
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    ideal.details = val;
+                    return null;
+                  }
+                  return 'Input Deal Details';
+                },
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextInputField(
+                      prefixIcon: Icons.currency_exchange_rounded,
+                      labelTextStr: 'Sign',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      contentPadding: const EdgeInsets.all(9),
+                      initialValue: '\u{20B9}',
+                      validator: (val) {
+                        ideal.currencySymbol = val;
+                        return null;
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: TextInputField(
+                      prefixIcon: Icons.money,
+                      labelTextStr: 'Currency Code',
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      contentPadding: const EdgeInsets.all(9),
+                      initialValue: 'INR',
+                      validator: (val) {
+                        ideal.currencyCode = val;
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
                 children: [
                   Expanded(
                     child: TextInputField(
                       prefixIcon: Icons.edit_note,
-                      labelTextStr: 'Amount',
+                      labelTextStr: 'Price',
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.number,
                       contentPadding: const EdgeInsets.all(9),
@@ -537,7 +568,7 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
                           ideal.price = double.parse(val);
                           return null;
                         }
-                        return 'Input Amount';
+                        return 'Input Price';
                       },
                     ),
                   ),
@@ -559,48 +590,88 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
                   ),
                 ],
               ),
-            ),
-            SelectOptionField(
-              prefixIcon: Icons.water_drop_outlined,
-              labelTextStr: 'Status',
-              options: const [
-                'Pending',
-                'Paid',
-              ],
-              selected: 'Pending',
-              validator: (val) {
-                if (val!.isNotEmpty) {
-                  ideal.status = val;
-                  return null;
-                }
-                return 'Input Discussion Status';
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: DateInputField(
-                    onDateChange: (date) => selectedDate = date,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextInputField(
+                        prefixIcon: Icons.edit_note,
+                        labelTextStr: 'Paid Amt',
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        contentPadding: const EdgeInsets.all(9),
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            ideal.paidAmt = double.parse(val);
+                            return null;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TextInputField(
+                        prefixIcon: Icons.edit_note,
+                        labelTextStr: 'Pending Amt',
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        contentPadding: const EdgeInsets.all(9),
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            ideal.pendingAmt = double.parse(val);
+                            return null;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SelectOptionField(
+                prefixIcon: Icons.water_drop_outlined,
+                labelTextStr: 'Status',
+                options: const [
+                  'Pending',
+                  'Paid',
+                ],
+                selected: 'Pending',
+                validator: (val) {
+                  if (val!.isNotEmpty) {
+                    ideal.status = val;
+                    return null;
+                  }
+                  return 'Input Discussion Status';
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: DateInputField(
+                      onDateChange: (date) => selectedDate = date,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: TimeInputField(
-                    onTimeChange: (time) => selectedTime = time,
+                  Expanded(
+                    child: TimeInputField(
+                      onTimeChange: (time) => selectedTime = time,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                AppButton(
-                  label: 'Save Now',
-                  onPressed: onDealSubmit,
-                  stretch: true,
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Row(
+                children: [
+                  AppButton(
+                    label: 'Save Now',
+                    onPressed: onDealSubmit,
+                    stretch: true,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

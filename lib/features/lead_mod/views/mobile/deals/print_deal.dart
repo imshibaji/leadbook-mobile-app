@@ -180,43 +180,106 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             ),
             pw.Divider(),
             pw.SizedBox(height: 10),
-            pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                children: [
-                  pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        ...clientInfo(font).toList(),
-                      ]),
-                  pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.end,
-                      children: [
-                        pw.Text(
-                          'Bill NO: 000' + (deal!.key + 1).toString(),
-                          style: pw.TextStyle(font: font),
-                        ),
-                        pw.Text(
-                          'For: #' + deal!.name!,
-                          style: pw.TextStyle(font: font),
-                        ),
-                      ]),
-                ]),
+            billingInfo(font),
             pw.SizedBox(
-              height: 30,
+              height: 6,
             ),
             invoiceTable(),
-            pw.SizedBox(height: 30),
-            paymentDetails(font),
+            pw.SizedBox(height: 5),
+            paidAndPending(),
+            pw.SizedBox(height: 10),
             signtureArea(signFont),
+            pw.Divider(height: 25),
+            paymentDetails(font),
+            // toc(font),
           ],
         ),
       ),
     );
   }
 
+  pw.Row paidAndPending() {
+    return pw.Row(
+      children: [
+        if (deal!.paidAmt != null)
+          pw.Row(
+            children: [
+              pw.Text("Paid Amount: "),
+              pw.Text(
+                (deal!.currencySymbol ?? '\u{20B9}') +
+                    deal!.paidAmt!.toStringAsFixed(2) +
+                    " " +
+                    (deal!.currencyCode ?? 'inr').toUpperCase(),
+              ),
+            ],
+          ),
+        pw.SizedBox(
+          width: 8,
+        ),
+        if (deal!.pendingAmt != null)
+          pw.Row(
+            children: [
+              pw.Text("Pending Amount: "),
+              pw.Text(
+                (deal!.currencySymbol ?? '\u{20B9}') +
+                    deal!.pendingAmt!.toStringAsFixed(2) +
+                    " " +
+                    (deal!.currencyCode ?? 'inr').toUpperCase(),
+              ),
+            ],
+          )
+      ],
+    );
+  }
+
+  pw.Column toc(pw.Font font) {
+    return pw.Column(children: [
+      pw.Text(
+        'Terms and Conditions',
+      ),
+      pw.Text(
+        'This is application Test. This is the note data.',
+        style: pw.TextStyle(font: font),
+      ),
+    ]);
+  }
+
+  pw.Row billingInfo(pw.Font font) {
+    return pw.Row(
+        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+        children: [
+          pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
+            ...clientInfo(font).toList(),
+          ]),
+          pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.end, children: [
+            pw.Text(
+              'Bill NO: 000' + (deal!.key + 1).toString(),
+              style: pw.TextStyle(font: font),
+            ),
+            pw.Text(
+              'Jnl ID: ' + deal!.name!,
+              style: pw.TextStyle(font: font),
+            ),
+            // pw.Text(
+            // 'Date: ' +
+            // deal!.createdAt!.day.toString() +
+            // "-" +
+            // deal!.createdAt!.month.toString() +
+            // "-" +
+            // deal!.createdAt!.year.toString() +
+            // " " +
+            // deal!.createdAt!.hour.toString() +
+            // ":" +
+            // deal!.createdAt!.minute.toString(),
+            // style: pw.TextStyle(font: font),
+            // ),
+          ]),
+        ]);
+  }
+
   pw.Padding paymentDetails(pw.Font font) {
     return pw.Padding(
-      padding: const pw.EdgeInsets.only(bottom: 20),
+      padding: const pw.EdgeInsets.only(bottom: 0),
       child: pw
           .Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
         if (profile != null && profile!.bankAccountNumber != null)
@@ -242,13 +305,10 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
                     (profile!.bankAccountNumber ?? 'No A/C Number'),
                 style: pw.TextStyle(fontSize: 14, font: font),
               ),
-            pw.SizedBox(height: 20),
-            pw.Text(
-              'Payment Status: ' + deal!.status!,
-              style: const pw.TextStyle(fontSize: 18),
-            ),
           ]),
-        if (profile != null && profile!.upiCode != null)
+        if (profile != null &&
+            profile!.upiCode != null &&
+            deal!.status!.toLowerCase() != 'paid')
           pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
@@ -262,8 +322,9 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
                       payeeName: profile!.name!,
                       upiID: profile!.upiCode!,
                       transactionNote: deal!.details!,
+                      currencyCode: (deal!.currencyCode ?? 'inr').toUpperCase(),
                       amount: (deal!.status!.toLowerCase() != 'paid')
-                          ? (deal!.price! - deal!.discount!)
+                          ? (deal!.price! - (deal!.discount ?? 0))
                           : 0,
                     ).qrCodeValue,
                     barcode: pw.Barcode.fromType(pw.BarcodeType.QrCode),
@@ -295,10 +356,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
         ),
       if (lead != null && lead!.mobile != null)
         pw.Text(
-          'Mobile: ' +
-              lead!.mobile! +
-              ', Alt Mobile: ' +
-              (lead!.altMobile ?? 'No Number'),
+          'Mobile: ' + lead!.mobile! + ', ' + (lead!.altMobile ?? ''),
           style: pw.TextStyle(fontSize: 14, font: font),
         ),
       if (lead != null && lead!.email != null)
@@ -315,10 +373,20 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
         '${deal!.createdAt!.year} ';
     return pw.Row(
       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Text(
-          'Date: ' + date,
-          style: const pw.TextStyle(fontSize: 18),
+        pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Text(
+              'Payment Status: ' + deal!.status!,
+              style: const pw.TextStyle(fontSize: 18),
+            ),
+            pw.Text(
+              'Date: ' + date,
+              style: const pw.TextStyle(fontSize: 18),
+            ),
+          ],
         ),
         (useDigiSign == true)
             ? pw.Column(children: [
@@ -386,7 +454,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             pw.Padding(
               padding: const pw.EdgeInsets.all(5),
               child: pw.Text(
-                deal!.price!.toStringAsFixed(2),
+                deal!.currencySymbol! + deal!.price!.toStringAsFixed(2),
                 textAlign: pw.TextAlign.right,
               ),
             ),
@@ -406,7 +474,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
               pw.Padding(
                 padding: const pw.EdgeInsets.all(5),
                 child: pw.Text(
-                  deal!.discount!.toStringAsFixed(2),
+                  deal!.currencySymbol! + deal!.discount!.toStringAsFixed(2),
                   textAlign: pw.TextAlign.right,
                 ),
               ),
@@ -423,7 +491,11 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             pw.Padding(
               padding: const pw.EdgeInsets.all(5),
               child: pw.Text(
-                ((deal!.price ?? 0) - (deal!.discount ?? 0)).toStringAsFixed(2),
+                deal!.currencySymbol! +
+                    ((deal!.price ?? 0) - (deal!.discount ?? 0))
+                        .toStringAsFixed(2) +
+                    ' ' +
+                    deal!.currencyCode!,
                 textAlign: pw.TextAlign.right,
               ),
             ),
@@ -439,11 +511,11 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
             pw.Text(
-              '',
-              style: pw.TextStyle(font: font, fontSize: 20),
+              'Page 1',
+              style: pw.TextStyle(font: font, fontSize: 14),
             ),
             pw.Text(
-              'Created By: LeadsBook',
+              'Created By: LeadBook',
               style: pw.TextStyle(font: font, fontSize: 14),
             ),
           ]),

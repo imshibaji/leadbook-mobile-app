@@ -16,6 +16,15 @@ class Deal extends HiveObject {
   String? name;
   @HiveField(DealFields.details)
   String? details;
+
+  @HiveField(DealFields.currencyCode)
+  String? currencyCode;
+  @HiveField(DealFields.currencySymbol)
+  String? currencySymbol;
+  @HiveField(DealFields.paidAmt)
+  double? paidAmt;
+  @HiveField(DealFields.pendingAmt)
+  double? pendingAmt;
   @HiveField(DealFields.price)
   double? price;
   @HiveField(DealFields.discount)
