@@ -5,4 +5,5 @@ class HiveAdapters {
 	static const String payment = 'PaymentAdapter';
 	static const String profile = 'ProfileAdapter';
 	static const String business = 'BusinessAdapter';
+	static const String currency = 'CurrencyAdapter';
 }

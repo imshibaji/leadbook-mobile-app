@@ -1,4 +1,4 @@
-import 'package:clean_architecture/features/lead_mod/providers/providers.dart';
+import 'package:leadbook_mobile_app/features/lead_mod/providers/providers.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

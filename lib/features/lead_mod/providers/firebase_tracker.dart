@@ -1,8 +1,8 @@
 // ignore: unused_import
 import 'dart:developer';
 
-import 'package:clean_architecture/core/core.dart';
-import 'package:clean_architecture/firebase_options.dart';
+import 'package:leadbook_mobile_app/core/core.dart';
+import 'package:leadbook_mobile_app/firebase_options.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 

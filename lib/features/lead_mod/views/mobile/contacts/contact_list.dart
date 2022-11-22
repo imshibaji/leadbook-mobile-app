@@ -1,9 +1,9 @@
-import 'package:clean_architecture/features/lead_mod/lead_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
 import '../../../../../core/core.dart';
 import '../../../utils/utils.dart';
+import '../../../lead_app.dart';
 
 class ContactListPage extends StatefulWidget {
   const ContactListPage({Key? key}) : super(key: key);

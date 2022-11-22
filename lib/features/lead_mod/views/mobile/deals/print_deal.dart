@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:clean_architecture/features/lead_mod/lead_app.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -10,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/core.dart';
 import '../../../dbobj/dbobjs.dart';
+import '../../../lead_app.dart';
 import '../../../providers/providers.dart';
 import '../../../services/services.dart';
 
@@ -21,6 +21,7 @@ class PrintDeal extends StatefulWidget {
 }
 
 class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
+  String currencySymbol = 'Rs.';
   Business? business;
   Profile? profile;
   Deal? deal;
@@ -44,6 +45,9 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
   void dataInit() {
     fillupBusinessData();
     fillupProfleData();
+    currencySymbol = (((deal!.currencyCode ?? 'inr').toLowerCase() == 'inr')
+        ? 'Rs.'
+        : (deal!.currencySymbol ?? 'Rs.'));
   }
 
   void fillupBusinessData() {
@@ -205,12 +209,10 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           pw.Row(
             children: [
               pw.Text("Paid Amount: "),
-              pw.Text(
-                (deal!.currencySymbol ?? '\u{20B9}') +
-                    deal!.paidAmt!.toStringAsFixed(2) +
-                    " " +
-                    (deal!.currencyCode ?? 'inr').toUpperCase(),
-              ),
+              pw.Text(currencySymbol +
+                  deal!.paidAmt!.toStringAsFixed(2) +
+                  " " +
+                  (deal!.currencyCode ?? 'inr').toUpperCase()),
             ],
           ),
         pw.SizedBox(
@@ -221,7 +223,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             children: [
               pw.Text("Pending Amount: "),
               pw.Text(
-                (deal!.currencySymbol ?? '\u{20B9}') +
+                currencySymbol +
                     deal!.pendingAmt!.toStringAsFixed(2) +
                     " " +
                     (deal!.currencyCode ?? 'inr').toUpperCase(),
@@ -454,7 +456,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             pw.Padding(
               padding: const pw.EdgeInsets.all(5),
               child: pw.Text(
-                deal!.currencySymbol! + deal!.price!.toStringAsFixed(2),
+                currencySymbol + deal!.price!.toStringAsFixed(2),
                 textAlign: pw.TextAlign.right,
               ),
             ),
@@ -474,7 +476,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
               pw.Padding(
                 padding: const pw.EdgeInsets.all(5),
                 child: pw.Text(
-                  deal!.currencySymbol! + deal!.discount!.toStringAsFixed(2),
+                  currencySymbol + deal!.discount!.toStringAsFixed(2),
                   textAlign: pw.TextAlign.right,
                 ),
               ),
@@ -491,11 +493,11 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             pw.Padding(
               padding: const pw.EdgeInsets.all(5),
               child: pw.Text(
-                deal!.currencySymbol! +
+                (deal!.currencyCode ?? 'inr').toUpperCase() +
+                    " " +
+                    currencySymbol +
                     ((deal!.price ?? 0) - (deal!.discount ?? 0))
-                        .toStringAsFixed(2) +
-                    ' ' +
-                    deal!.currencyCode!,
+                        .toStringAsFixed(2),
                 textAlign: pw.TextAlign.right,
               ),
             ),

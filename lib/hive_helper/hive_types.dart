@@ -5,4 +5,5 @@ class HiveTypes {
 	static const int payment = 3;
 	static const int profile = 4;
 	static const int business = 5;
+	static const int currency = 6;
 }

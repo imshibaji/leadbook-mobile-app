@@ -1,12 +1,12 @@
-import 'package:clean_architecture/features/lead_mod/dbobj/payment.dart';
-import 'package:clean_architecture/features/lead_mod/widgets/date_range_btn_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '../../../../config/config.dart';
 import '../../../../core/core.dart';
+import '../../dbobj/payment.dart';
 import '../../lead_mod.dart';
+import '../../widgets/date_range_btn_ui.dart';
 
 class ReportsForMobile extends StatefulWidget {
   const ReportsForMobile({Key? key}) : super(key: key);

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:leadbook_mobile_app/features/lead_mod/dbobj/currency.dart';
 
 import 'package:flutter/scheduler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -31,7 +32,8 @@ void registerAdapters() async {
 
       if (await File(dbLeads).exists() == false) {
         await Hive.openBox<Lead>(LeadService.boxName, path: dbLeads);
-      }
+      	Hive.registerAdapter(CurrencyAdapter());
+}
 
       String dbDeals = appPath + '/' + DealService.boxName + '.db';
       copyData(dbDeals);

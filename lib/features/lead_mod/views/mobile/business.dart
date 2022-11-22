@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:clean_architecture/features/lead_mod/dbobj/business.dart';
-import 'package:clean_architecture/features/lead_mod/services/services.dart';
+import 'package:leadbook_mobile_app/features/lead_mod/dbobj/business.dart';
+import 'package:leadbook_mobile_app/features/lead_mod/services/services.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
