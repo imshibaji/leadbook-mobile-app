@@ -9,6 +9,8 @@
 .history
 .svn/
 
+android-backup/
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -34,6 +36,9 @@
 
 # Remove App Auth
 /lib/config/app_config.dart
+
+# Firebase Auth Key
+lib/firebase_options.dart
 
 # Web related
 lib/generated_plugin_registrant.dart

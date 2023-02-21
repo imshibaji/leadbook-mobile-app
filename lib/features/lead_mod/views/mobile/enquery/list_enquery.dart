@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +44,8 @@ class _ListEnqueryForMobileState extends State<ListEnqueryForMobile> {
             Lead lead = ep.enqueries![index].attributes!;
 
             String title = lead.customer_name ?? 'No Name';
-            String details = (lead.customer_email ?? 'No Email') +
-                ' | ' +
-                (lead.customer_mobile ?? 'No Number');
+            String details =
+                '${lead.customer_email ?? 'No Email'} | ${lead.customer_mobile ?? 'No Number'}';
 
             return Padding(
               padding: const EdgeInsets.all(3.0),

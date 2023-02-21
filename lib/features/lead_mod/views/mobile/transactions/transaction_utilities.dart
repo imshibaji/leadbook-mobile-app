@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -108,6 +110,7 @@ Container quickTotalView(BuildContext context, ServiceProvider sp) {
 void showTransactionAdd(BuildContext context) {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+  // ignore: no_leading_underscores_for_local_identifiers
   GlobalKey<FormState> _form = GlobalKey();
   Payment payment = Payment();
 
@@ -226,10 +229,10 @@ void addTransection(Lead lead, Deal deal, [bool doTran = false]) async {
     payment.createdAt = DateTime.now();
 
     if (deal.status == 'Paid') {
-      payment.details = deal.name! + ' paid by ' + lead.name!;
+      payment.details = '${deal.name!} paid by ${lead.name!}';
       payment.type = 'Income';
     } else {
-      payment.details = deal.name! + ' unpaid by ' + lead.name!;
+      payment.details = '${deal.name!} unpaid by ${lead.name!}';
       payment.type = 'Expense';
     }
 

@@ -27,7 +27,11 @@ class ActionTopButtons extends ActionButtons {
               label: 'Reports',
               link: LeadApp.reports,
             ),
-
+            ButtonData(
+              icon: Icons.monetization_on_sharp,
+              label: 'Currencies',
+              link: LeadApp.listCurrency,
+            ),
             // ButtonData(
             //   icon: Icons.notifications,
             //   label: 'Awasome Notifications',

@@ -202,7 +202,7 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
               children: [
                 StatusText(label: followup.isDone == true ? 'Done' : 'Pending'),
                 Text(
-                  ' | ' + dateTime,
+                  ' | $dateTime',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -450,7 +450,7 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
       // Setup Notification
       if (ifollowup.status!.toLowerCase() != 'done') {
         AwesomeNotificationService().showActivityNotification(
-          'Followup for ' + ilead.name!,
+          'Followup for ${ilead.name!}',
           ifollowup.discuss!,
           payload: {
             'mobile': ilead.mobile ?? '',
@@ -711,12 +711,8 @@ class _ViewLeadForMobileState extends State<ViewLeadForMobile> {
       // Setup Notification
       if (ndeal.status!.toLowerCase() != 'paid') {
         AwesomeNotificationService().showActivityNotification(
-          'Deal: ' + ndeal.name!,
-          ndeal.details! +
-              ' amount of ' +
-              (ndeal.price! - (ndeal.discount ?? 0)).toString() +
-              ' is ' +
-              ndeal.status!,
+          'Deal: ${ndeal.name!}',
+          '${ndeal.details!} amount of ${ndeal.price! - (ndeal.discount ?? 0)} is ${ndeal.status!}',
           payload: {
             'mobile': ilead.mobile ?? '',
             'email': ilead.email ?? '',

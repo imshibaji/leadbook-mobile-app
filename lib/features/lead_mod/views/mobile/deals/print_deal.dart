@@ -209,10 +209,8 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           pw.Row(
             children: [
               pw.Text("Paid Amount: "),
-              pw.Text(currencySymbol +
-                  deal!.paidAmt!.toStringAsFixed(2) +
-                  " " +
-                  (deal!.currencyCode ?? 'inr').toUpperCase()),
+              pw.Text(
+                  "$currencySymbol${deal!.paidAmt!.toStringAsFixed(2)} ${(deal!.currencyCode ?? 'inr').toUpperCase()}"),
             ],
           ),
         pw.SizedBox(
@@ -223,10 +221,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             children: [
               pw.Text("Pending Amount: "),
               pw.Text(
-                currencySymbol +
-                    deal!.pendingAmt!.toStringAsFixed(2) +
-                    " " +
-                    (deal!.currencyCode ?? 'inr').toUpperCase(),
+                "$currencySymbol${deal!.pendingAmt!.toStringAsFixed(2)} ${(deal!.currencyCode ?? 'inr').toUpperCase()}",
               ),
             ],
           )
@@ -255,11 +250,11 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           ]),
           pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.end, children: [
             pw.Text(
-              'Bill NO: 000' + (deal!.key + 1).toString(),
+              'Bill NO: 000${deal!.key + 1}',
               style: pw.TextStyle(font: font),
             ),
             pw.Text(
-              'Jnl ID: ' + deal!.name!,
+              'Jnl ID: ${deal!.name!}',
               style: pw.TextStyle(font: font),
             ),
             // pw.Text(
@@ -298,13 +293,12 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
               ),
             if (profile != null && profile!.bankIfsc != null)
               pw.Text(
-                'IFSC / RTGS CODE: ' + (profile!.bankIfsc ?? 'No IFSC / RTGS'),
+                'IFSC / RTGS CODE: ${profile!.bankIfsc ?? 'No IFSC / RTGS'}',
                 style: pw.TextStyle(fontSize: 14, font: font),
               ),
             if (profile != null && profile!.bankAccountNumber != null)
               pw.Text(
-                'A/C Number: ' +
-                    (profile!.bankAccountNumber ?? 'No A/C Number'),
+                'A/C Number: ${profile!.bankAccountNumber ?? 'No A/C Number'}',
                 style: pw.TextStyle(fontSize: 14, font: font),
               ),
           ]),
@@ -353,17 +347,17 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
         ),
       if (lead != null && lead!.address != null)
         pw.Text(
-          'Address: ' + (lead!.address ?? 'No Address'),
+          'Address: ${lead!.address ?? 'No Address'}',
           style: pw.TextStyle(fontSize: 14, font: font),
         ),
       if (lead != null && lead!.mobile != null)
         pw.Text(
-          'Mobile: ' + lead!.mobile! + ', ' + (lead!.altMobile ?? ''),
+          'Mobile: ${lead!.mobile!}, ${lead!.altMobile ?? ''}',
           style: pw.TextStyle(fontSize: 14, font: font),
         ),
       if (lead != null && lead!.email != null)
         pw.Text(
-          'Email: ' + (lead!.email ?? 'No Email'),
+          'Email: ${lead!.email ?? 'No Email'}',
           style: pw.TextStyle(fontSize: 16, font: font),
         ),
     ];
@@ -381,11 +375,11 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
             pw.Text(
-              'Payment Status: ' + deal!.status!,
+              'Payment Status: ${deal!.status!}',
               style: const pw.TextStyle(fontSize: 18),
             ),
             pw.Text(
-              'Date: ' + date,
+              'Date: $date',
               style: const pw.TextStyle(fontSize: 18),
             ),
           ],
@@ -493,11 +487,7 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
             pw.Padding(
               padding: const pw.EdgeInsets.all(5),
               child: pw.Text(
-                (deal!.currencyCode ?? 'inr').toUpperCase() +
-                    " " +
-                    currencySymbol +
-                    ((deal!.price ?? 0) - (deal!.discount ?? 0))
-                        .toStringAsFixed(2),
+                "${(deal!.currencyCode ?? 'inr').toUpperCase()} $currencySymbol${((deal!.price ?? 0) - (deal!.discount ?? 0)).toStringAsFixed(2)}",
                 textAlign: pw.TextAlign.right,
               ),
             ),
@@ -543,33 +533,22 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
                     ),
                   if (business != null)
                     pw.Text(
-                      (business!.address ?? '') +
-                          ', ' +
-                          (business!.city ?? '') +
-                          ', ' +
-                          (business!.state ?? '') +
-                          ', ' +
-                          (business!.country ?? '') +
-                          ', ' +
-                          (business!.pincode ?? '').toString(),
+                      '${business!.address ?? ''}, ${business!.city ?? ''}, ${business!.state ?? ''}, ${business!.country ?? ''}, ${business!.pincode ?? ''}',
                       style: pw.TextStyle(font: font, fontSize: 12),
                     ),
                   if (business != null)
                     pw.Text(
-                      '(M): ' +
-                          (business!.phone ?? '') +
-                          ', ' +
-                          (business!.altPhone ?? ''),
+                      '(M): ${business!.phone ?? ''}, ${business!.altPhone ?? ''}',
                       style: pw.TextStyle(font: font, fontSize: 12),
                     ),
                   if (business != null)
                     pw.Text(
-                      'Email: ' + (business!.email ?? ''),
+                      'Email: ${business!.email ?? ''}',
                       style: pw.TextStyle(font: font, fontSize: 12),
                     ),
                   if (business != null && business!.website != null)
                     pw.Text(
-                      'Website: ' + (business!.website ?? ''),
+                      'Website: ${business!.website ?? ''}',
                       style: pw.TextStyle(font: font, fontSize: 12),
                     ),
                 ],
@@ -584,26 +563,8 @@ class _PrintDealState extends State<PrintDeal> with AfterLayoutMixin {
                 pw.Padding(
                   padding: const pw.EdgeInsets.only(right: 20),
                   child: pw.BarcodeWidget(
-                    data: 'Name: ' +
-                        (business!.name ?? '') +
-                        '; Address: ' +
-                        (business!.address ?? '') +
-                        ', ' +
-                        (business!.city ?? '') +
-                        ', ' +
-                        (business!.state ?? '') +
-                        ', ' +
-                        (business!.country ?? '') +
-                        ', ' +
-                        (business!.pincode ?? '').toString() +
-                        '; Phone: ' +
-                        (business!.phone ?? '') +
-                        ', ' +
-                        (business!.altPhone ?? '') +
-                        '; Email: ' +
-                        (business!.email ?? '') +
-                        '; Website: ' +
-                        (business!.website ?? ''),
+                    data:
+                        'Name: ${business!.name ?? ''}; Address: ${business!.address ?? ''}, ${business!.city ?? ''}, ${business!.state ?? ''}, ${business!.country ?? ''}, ${business!.pincode ?? ''}; Phone: ${business!.phone ?? ''}, ${business!.altPhone ?? ''}; Email: ${business!.email ?? ''}; Website: ${business!.website ?? ''}',
                     barcode: pw.Barcode.fromType(pw.BarcodeType.QrCode),
                     color: PdfColors.black,
                     width: 90,

@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:leadbook_mobile_app/features/lead_mod/dbobj/currency.dart';
 
 import 'package:flutter/scheduler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,42 +17,47 @@ void registerAdapters() async {
   Hive.registerAdapter(PaymentAdapter());
   Hive.registerAdapter(ProfileAdapter());
   Hive.registerAdapter(BusinessAdapter());
+  Hive.registerAdapter(CurrencyAdapter());
 
   SchedulerBinding.instance.addPostFrameCallback((_) async {
     if (Platform.isAndroid) {
       Directory? appDocDir = await getApplicationDocumentsDirectory();
-      String appPath = appDocDir.path + '/data';
+      String appPath = '${appDocDir.path}/data';
       Directory(appPath).create(recursive: true);
 
       log(appPath);
 
-      String dbLeads = appPath + '/' + LeadService.boxName + '.db';
+      String dbLeads = '$appPath/${LeadService.boxName}.db';
       copyData(dbLeads);
 
       if (await File(dbLeads).exists() == false) {
         await Hive.openBox<Lead>(LeadService.boxName, path: dbLeads);
-      	Hive.registerAdapter(CurrencyAdapter());
-}
+        Hive.registerAdapter(CurrencyAdapter());
+      }
 
-      String dbDeals = appPath + '/' + DealService.boxName + '.db';
+      String dbDeals = '$appPath/${DealService.boxName}.db';
       copyData(dbDeals);
       await Hive.openBox<Deal>(DealService.boxName, path: dbDeals);
 
-      String dbFollowups = appPath + '/' + FollowupService.boxName + '.db';
+      String dbFollowups = '$appPath/${FollowupService.boxName}.db';
       copyData(dbFollowups);
       await Hive.openBox<Followup>(FollowupService.boxName, path: dbFollowups);
 
-      String dbPayments = appPath + '/' + PaymentService.boxName + '.db';
+      String dbPayments = '$appPath/${PaymentService.boxName}.db';
       copyData(dbPayments);
       await Hive.openBox<Payment>(PaymentService.boxName, path: dbPayments);
 
-      String dbProfile = appPath + '/' + ProfileService.boxName + '.db';
+      String dbProfile = '$appPath/${ProfileService.boxName}.db';
       copyData(dbProfile);
       await Hive.openBox<Profile>(ProfileService.boxName, path: dbProfile);
 
-      String dbBusiness = appPath + '/' + BusinessService.boxName + '.db';
+      String dbBusiness = '$appPath/${BusinessService.boxName}.db';
       copyData(dbBusiness);
       await Hive.openBox<Business>(BusinessService.boxName, path: dbBusiness);
+
+      String dbCurrency = '$appPath/${CurrencyService.boxName}.db';
+      copyData(dbCurrency);
+      await Hive.openBox<Currency>(CurrencyService.boxName, path: dbCurrency);
     }
 
     // await Hive.openBox<Lead>(LeadService.boxName);
@@ -67,16 +71,16 @@ void registerAdapters() async {
 Future<Directory?> copyData(String dbPath) async {
   Directory appDir = await getApplicationDocumentsDirectory();
   String oldAppDataPath = appDir.path;
-  String newAppDataPath = appDir.path + '/data';
+  String newAppDataPath = '${appDir.path}/data';
 
-  Directory oldFile = Directory(oldAppDataPath + '/' + dbPath.split('/').last);
+  Directory oldFile = Directory('$oldAppDataPath/${dbPath.split('/').last}');
   // log(oldFile.path);
   // print(await oldFile.exists());
   if (await oldFile.exists()) {
     Directory copyPath =
         await Directory(newAppDataPath).create(recursive: true);
     Directory newFile =
-        await oldFile.rename(copyPath.path + '/' + dbPath.split('/').last);
+        await oldFile.rename('${copyPath.path}/${dbPath.split('/').last}');
     // log(newFile.path);
     return newFile;
   }

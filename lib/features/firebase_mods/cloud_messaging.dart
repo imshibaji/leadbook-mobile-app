@@ -40,7 +40,7 @@ class CloudMessaging {
   static listenFCM() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
-      log(message.notification!.title! + ',  ' + message.notification!.body!);
+      log('${message.notification!.title!},  ${message.notification!.body!}');
       // print(message.data);
 
       AwesomeNotificationService().showFCM(

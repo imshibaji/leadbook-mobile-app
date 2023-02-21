@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -151,7 +153,7 @@ class _ListLeadForMobileState extends State<ListLeadForMobile>
                             ),
                           ],
                         ),
-                        Text("> " + details),
+                        Text("> $details"),
                       ],
                     ),
                     shape: Border.all(width: 0.5),

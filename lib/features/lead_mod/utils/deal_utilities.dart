@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -139,7 +141,7 @@ void viewDeal(BuildContext context, Deal deal) {
               Text(deal.details ?? 'Deal Details'),
               const Divider(),
               Text(
-                'Price: ' + deal.price.toString(),
+                'Price: ${deal.price}',
                 style: const TextStyle(fontSize: 18),
               ),
               Row(
@@ -200,6 +202,7 @@ void viewDeal(BuildContext context, Deal deal) {
 }
 
 editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
+  // ignore: no_leading_underscores_for_local_identifiers
   GlobalKey<FormState> _form = GlobalKey<FormState>();
   DateTime selectedDate = deal.createdAt!;
 
@@ -429,12 +432,8 @@ editDeal(BuildContext context, Deal deal, {Function(Deal)? onDeal}) {
                         )
                         .first;
                     AwesomeNotificationService().showActivityNotification(
-                      'Invoice: ' + ideal.name!,
-                      ideal.details! +
-                          ' amount of ' +
-                          (ideal.price! - (ideal.discount ?? 0)).toString() +
-                          ' is ' +
-                          ideal.status!,
+                      'Invoice: ${ideal.name!}',
+                      '${ideal.details!} amount of ${ideal.price! - (ideal.discount ?? 0)} is ${ideal.status!}',
                       payload: {
                         'mobile': ilead.mobile ?? '',
                         'email': ilead.email ?? '',

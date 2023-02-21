@@ -28,3 +28,7 @@ export 'help_controller.dart';
 export 'profile_controller.dart';
 export 'settings_controller.dart';
 export 'reports_controller.dart';
+
+export 'currency/currency_add_controller.dart';
+export 'currency/currency_edit_controller.dart';
+export 'currency/currency_list_controller.dart';

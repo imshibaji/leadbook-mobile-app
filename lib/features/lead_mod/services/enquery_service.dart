@@ -24,7 +24,7 @@ class EnqueryService {
 
   Future<EnquerySingle?> getOne(int id) async {
     Response res = await _http.get(
-      ApiEndpoint.enquery + '/' + id.toString() + '?populate=*',
+      '${ApiEndpoint.enquery}/$id?populate=*',
     );
     if (res.statusCode == 200) {
       EnquerySingle enquery = EnquerySingle.fromJson(jsonEncode(res.data));
@@ -34,7 +34,7 @@ class EnqueryService {
   }
 
   Future<EnquerySingle?> create(Lead lead) async {
-    Map<String, dynamic> _data = {
+    Map<String, dynamic> data = {
       'data': {
         'purpose': lead.purpose!.toString(),
         'customer_name': lead.customer_name!.toString(),
@@ -46,7 +46,7 @@ class EnqueryService {
     };
     Response res = await _http.post(
       ApiEndpoint.enquery,
-      data: jsonEncode(_data),
+      data: jsonEncode(data),
     );
     if (res.statusCode == 200 || res.statusCode == 201) {
       EnquerySingle enquery = EnquerySingle.fromJson(jsonEncode(res.data));
@@ -56,7 +56,7 @@ class EnqueryService {
   }
 
   Future<EnquerySingle?> update(int id, Lead lead) async {
-    Map<String, dynamic> _data = {
+    Map<String, dynamic> data = {
       'data': {
         'purpose': lead.purpose!.toString(),
         'customer_name': lead.customer_name!.toString(),
@@ -67,8 +67,8 @@ class EnqueryService {
       }
     };
     Response res = await _http.put(
-      ApiEndpoint.enquery + '/' + id.toString(),
-      data: jsonEncode(_data),
+      '${ApiEndpoint.enquery}/$id',
+      data: jsonEncode(data),
     );
     if (res.statusCode == 200 || res.statusCode == 201) {
       EnquerySingle enquery = EnquerySingle.fromJson(jsonEncode(res.data));
@@ -82,7 +82,7 @@ class EnqueryService {
     Lead lead,
     List<Map<String, dynamic>> followups,
   ) async {
-    Map<String, dynamic> _data = {
+    Map<String, dynamic> data = {
       'data': {
         'purpose': lead.purpose!.toString(),
         'customer_name': lead.customer_name!.toString(),
@@ -94,8 +94,8 @@ class EnqueryService {
       }
     };
     Response res = await _http.put(
-      ApiEndpoint.enquery + '/' + id.toString(),
-      data: jsonEncode(_data),
+      '${ApiEndpoint.enquery}/$id',
+      data: jsonEncode(data),
     );
     if (res.statusCode == 200 || res.statusCode == 201) {
       EnquerySingle enquery = EnquerySingle.fromJson(jsonEncode(res.data));
@@ -106,7 +106,7 @@ class EnqueryService {
 
   Future<EnquerySingle?> delete(int id) async {
     Response res = await _http.delete(
-      ApiEndpoint.enquery + '/' + id.toString(),
+      '${ApiEndpoint.enquery}/$id',
     );
     if (res.statusCode == 200 || res.statusCode == 201) {
       EnquerySingle enquery = EnquerySingle.fromJson(jsonEncode(res.data));

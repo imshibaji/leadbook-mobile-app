@@ -30,11 +30,7 @@ class LBDateRangeBtnUI extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    startDate.day.toString() +
-                        '-' +
-                        startDate.month.toString() +
-                        '-' +
-                        startDate.year.toString(),
+                    '${startDate.day}-${startDate.month}-${startDate.year}',
                   ),
                 ],
               ),
@@ -50,11 +46,7 @@ class LBDateRangeBtnUI extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    endDate.day.toString() +
-                        '-' +
-                        endDate.month.toString() +
-                        '-' +
-                        endDate.year.toString(),
+                    '${endDate.day}-${endDate.month}-${endDate.year}',
                   ),
                 ],
               ),

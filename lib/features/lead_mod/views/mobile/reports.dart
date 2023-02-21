@@ -204,7 +204,7 @@ class _ReportsForMobileState extends State<ReportsForMobile> {
               textAlign: TextAlign.left,
             ),
             Text(
-              'At: ' + dateTime,
+              'At: $dateTime',
               style: const TextStyle(fontSize: 9),
             ),
           ],

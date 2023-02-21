@@ -33,10 +33,6 @@ class AppButton extends StatelessWidget {
           padding: EdgeInsets.all(marginValue!),
           child: ElevatedButton(
             onPressed: onPressed,
-            child: Text(
-              label,
-              style: const TextStyle(fontSize: 12),
-            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: backgroundColor ??
                   (tm.isDarkMode
@@ -50,6 +46,10 @@ class AppButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(circularValue!),
               ),
             ),
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 12),
+            ),
           ),
         ),
       );
@@ -58,10 +58,6 @@ class AppButton extends StatelessWidget {
         padding: EdgeInsets.all(marginValue!),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(
-            label,
-            style: const TextStyle(fontSize: 16),
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor ??
                 (tm.isDarkMode
@@ -73,6 +69,10 @@ class AppButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(circularValue!),
             ),
+          ),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 16),
           ),
         ),
       );

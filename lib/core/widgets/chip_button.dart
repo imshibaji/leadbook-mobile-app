@@ -35,9 +35,6 @@ class ChipButton extends StatelessWidget {
           padding: EdgeInsets.all(marginValue!),
           child: ElevatedButton(
             onPressed: onPressed,
-            child: StatusText(
-              label: label,
-            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: backgroundColor ??
                   (tm.isDarkMode
@@ -51,6 +48,9 @@ class ChipButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(circularValue!),
               ),
             ),
+            child: StatusText(
+              label: label,
+            ),
           ),
         ),
       );
@@ -59,9 +59,6 @@ class ChipButton extends StatelessWidget {
         padding: EdgeInsets.all(marginValue!),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: StatusText(
-            label: label,
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor ??
                 (tm.isDarkMode
@@ -74,6 +71,9 @@ class ChipButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(circularValue!),
             ),
+          ),
+          child: StatusText(
+            label: label,
           ),
         ),
       );

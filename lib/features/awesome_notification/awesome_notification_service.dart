@@ -46,19 +46,18 @@ class AwesomeNotificationService {
       // Channel groups are only visual and are not required
       channelGroups: [
         NotificationChannelGroup(
-          channelGroupkey: 'leadbook_channel_group',
+          channelGroupKey: 'leadbook_channel_group',
           channelGroupName: 'LeadBook Notifications',
         )
       ],
-      debug: false,
+      debug: true,
     );
     permissionCheck();
   }
 
   listenActionStream() {
-    AwesomeNotifications()
-        .actionStream
-        .listen((ReceivedNotification receivedNotification) {
+    AwesomeNotifications().setListeners(onActionReceivedMethod:
+        (ReceivedNotification receivedNotification) async {
       final data = jsonDecode(receivedNotification.toString());
       dev.log(receivedNotification.toMap().toString());
       // log(data['buttonKeyPressed']);

@@ -24,6 +24,11 @@ export 'mobile/leads/view_lead.dart';
 export 'mobile/leads/add_lead.dart';
 export 'mobile/leads/edit_leads.dart';
 
+// Currency Views
+export 'mobile/currency/currency_add.dart';
+export 'mobile/currency/currency_edit.dart';
+export 'mobile/currency/currency_list.dart';
+
 // Misc
 export 'mobile/help.dart';
 export 'mobile/business.dart';

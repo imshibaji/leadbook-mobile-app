@@ -135,7 +135,7 @@ class _FollowupForMobileState extends State<FollowupForMobile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              (lead.name ?? 'No Name') + ' | At: ' + dateTime,
+              '${lead.name ?? 'No Name'} | At: $dateTime',
               style: const TextStyle(fontSize: 8),
             ),
             Text(

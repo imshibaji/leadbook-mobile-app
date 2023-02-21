@@ -5,3 +5,4 @@ export 'lead_box.dart';
 export 'payment_box.dart';
 export 'profile_box.dart';
 export 'business_box.dart';
+export 'currency_box.dart';

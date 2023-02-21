@@ -3,33 +3,37 @@ import 'controllers/controllers.dart';
 
 class LeadApp extends RouteManager {
   static const String name = '';
-  static const String home = name + '/';
-  static const String search = name + '/search';
-  static const String listEnquery = name + '/list_enquery';
-  static const String addEnquery = name + '/add_enquery';
-  static const String editEnquery = name + '/edit_enquery';
-  static const String viewEnquery = name + '/view_enquery';
+  static const String home = '$name/';
+  static const String search = '$name/search';
+  static const String listEnquery = '$name/list_enquery';
+  static const String addEnquery = '$name/add_enquery';
+  static const String editEnquery = '$name/edit_enquery';
+  static const String viewEnquery = '$name/view_enquery';
 
-  static const String listLeads = name + '/list_leads';
-  static const String viewLead = name + '/view_lead';
-  static const String addLead = name + '/add_lead';
-  static const String editLead = name + '/edit_lead';
+  static const String listLeads = '$name/list_leads';
+  static const String viewLead = '$name/view_lead';
+  static const String addLead = '$name/add_lead';
+  static const String editLead = '$name/edit_lead';
 
-  static const String followup = name + '/followup';
-  static const String addFollowup = name + '/add_followup';
-  static const String listDeal = name + '/list_deal';
-  static const String addDeal = name + '/add_deal';
-  static const String printDeal = name + '/print_deal';
-  static const String transactions = name + '/transactions';
+  static const String followup = '$name/followup';
+  static const String addFollowup = '$name/add_followup';
+  static const String listDeal = '$name/list_deal';
+  static const String addDeal = '$name/add_deal';
+  static const String printDeal = '$name/print_deal';
+  static const String transactions = '$name/transactions';
 
-  static const String contactList = name + '/contact_list';
-  static const String contactPage = name + '/contact_page';
+  static const String contactList = '$name/contact_list';
+  static const String contactPage = '$name/contact_page';
 
-  static const String businessPage = name + '/business';
-  static const String helpPage = name + '/help';
-  static const String profile = name + '/profile';
-  static const String settings = name + '/settings';
-  static const String reports = name + '/reports';
+  static const String businessPage = '$name/business';
+  static const String helpPage = '$name/help';
+  static const String profile = '$name/profile';
+  static const String settings = '$name/settings';
+  static const String reports = '$name/reports';
+
+  static const String addCurrency = '$name/add_currency';
+  static const String editCurrency = '$name/edit_currency';
+  static const String listCurrency = '$name/list_currency';
 
   LeadApp() {
     addRoute(LeadApp.home, (context) => const DashboardController());
@@ -69,5 +73,10 @@ class LeadApp extends RouteManager {
     addRoute(profile, (context) => const ProfileController());
     addRoute(settings, (context) => const SettingsController());
     addRoute(reports, (context) => const ReportsController());
+
+    // Currency-------------------------------
+    addRoute(addCurrency, (context) => const CurrencyAddController());
+    addRoute(editCurrency, (context) => const CurrencyEditController());
+    addRoute(listCurrency, (context) => const CurrencyListController());
   }
 }

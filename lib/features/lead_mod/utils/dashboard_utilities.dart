@@ -28,7 +28,7 @@ SizedBox balanceCard({
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/' + assetsImageName,
+                'assets/$assetsImageName',
                 width: 50,
               ),
               const SizedBox(
@@ -100,7 +100,7 @@ Expanded ieCard({
           child: Column(
             children: [
               SvgPicture.asset(
-                'assets/' + assetsImageName,
+                'assets/$assetsImageName',
                 width: 60,
               ),
               (subtitle != null)

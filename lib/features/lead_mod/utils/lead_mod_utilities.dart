@@ -35,23 +35,23 @@ List getFilterDatas(List list, [String status = 'All']) {
 extension StringParse on double {
   String toK() {
     if (this > 1000000000) {
-      return (toInt() / 1000000000).toStringAsFixed(2) + 'B';
+      return '${(toInt() / 1000000000).toStringAsFixed(2)}B';
     }
     if (this > 1000000) {
-      return (toInt() / 1000000).toStringAsFixed(2) + 'M';
+      return '${(toInt() / 1000000).toStringAsFixed(2)}M';
     }
     if (this > 1000) {
-      return (toInt() / 1000).toStringAsFixed(2) + 'K';
+      return '${(toInt() / 1000).toStringAsFixed(2)}K';
     }
     return toString();
   }
 
   String toM() {
     if (this > 1000000000) {
-      return (toInt() / 1000000000).toStringAsFixed(4) + 'B';
+      return '${(toInt() / 1000000000).toStringAsFixed(4)}B';
     }
     if (this > 1000000) {
-      return (toInt() / 1000000).toStringAsFixed(4) + 'M';
+      return '${(toInt() / 1000000).toStringAsFixed(4)}M';
     }
     // if (this > 1000) {
     //   return (toInt() / 1000).toStringAsFixed(2) + 'K';

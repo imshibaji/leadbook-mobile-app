@@ -158,10 +158,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Invoice: #' +
-                                    (deal.key + 1).toString() +
-                                    ' | At: ' +
-                                    dateTime,
+                                'Invoice: #${deal.key + 1} | At: $dateTime',
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(fontSize: 8),
                               ),
@@ -187,7 +184,7 @@ class _ListDealForMobileState extends State<ListDealForMobile> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              (lead.name ?? 'No Name') + ' | ',
+                              '${lead.name ?? 'No Name'} | ',
                               style: const TextStyle(fontSize: 10),
                             ),
                             const Text(

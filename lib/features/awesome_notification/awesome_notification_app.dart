@@ -3,7 +3,7 @@ import 'awesome_notification.dart';
 
 class AwesomeNotificationApp extends RouteManager {
   static const String name = 'awesome_notify';
-  static const String home = name + '/';
+  static const String home = '$name/';
 
   AwesomeNotificationApp() {
     addRoute(AwesomeNotificationApp.home,
